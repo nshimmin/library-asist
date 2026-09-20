@@ -9,3 +9,4 @@ EOF
 : 1789849042:0;cd library-asist
 : 1789849043:0;ls
 : 1789849168:0;source ~/.bashrc
+: 1789849297:0;git commit -m "first edition upload"
