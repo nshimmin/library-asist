@@ -16,8 +16,48 @@ from llama_index.core.readers.base import BaseReader
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.readers.file import PyMuPDFReader
 from llama_index.llms.groq import Groq
+from llama_index.llms.openrouter import OpenRouter
 
 PERSIST_DIR = "./storage"
+
+
+def get_secret(name: str):
+    """Read a value from Streamlit secrets, falling back to an environment variable."""
+    try:
+        value = st.secrets.get(name)
+    except Exception:
+        value = None
+    return value or os.environ.get(name)
+
+
+# Fully open model (open weights, training data, and code) from Ai2, served via OpenRouter.
+OPEN_MODEL = "allenai/olmo-3.1-32b-instruct"
+
+
+def pick_llm():
+    """Return (label, llm). Uses the fully open OLMo model if an OpenRouter key is set; otherwise Groq."""
+    openrouter_key = get_secret("openrouter_api")
+    if openrouter_key:
+        model = get_secret("llm_model") or OPEN_MODEL
+        label = f"{model} (via OpenRouter)"
+        return label, OpenRouter(
+            api_key=openrouter_key,
+            model=model,
+            is_function_calling_model=True,
+            context_window=65536,
+            max_tokens=2048,
+            timeout=360.0,
+        )
+
+    groq_key = get_secret("groq_api")
+    if not groq_key:
+        raise ValueError("No model key found. Add openrouter_api or groq_api in Streamlit Cloud: App settings → Secrets.")
+    return "openai/gpt-oss-120b (via Groq)", Groq(
+        api_key=groq_key,
+        model="openai/gpt-oss-120b",
+        request_timeout=360.0,
+        context_window=8000,
+    )
 
 
 @st.cache_resource
@@ -25,21 +65,7 @@ def load_agent():
     """Build (or load) the index and agent once, then reuse across all user interactions."""
     Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
-    # Read the key from Streamlit secrets first, then fall back to an environment variable
-    try:
-        api_key_val = st.secrets.get("groq_api")
-    except Exception:
-        api_key_val = None
-    api_key_val = api_key_val or os.environ.get("groq_api")
-    if not api_key_val:
-        raise ValueError("groq_api secret not found. Add it in Streamlit Cloud: App settings → Secrets.")
-
-    Settings.llm = Groq(
-        api_key=api_key_val,
-        model="openai/gpt-oss-120b",
-        request_timeout=360.0,
-        context_window=8000,
-    )
+    model_label, Settings.llm = pick_llm()
 
     Settings.text_splitter = SentenceSplitter(chunk_size=512, chunk_overlap=50)
 
@@ -79,10 +105,10 @@ def load_agent():
         plainly: "I couldn't find anything on that in our documents" — don't
         guess or fill gaps with outside knowledge.""",
     )
-    return agent
+    return agent, model_label
 
 
-agent = load_agent()
+agent, model_label = load_agent()
 
 @st.cache_resource
 def get_event_loop():
@@ -104,6 +130,7 @@ def ask_agent(question: str) -> str:
 
 st.title("Library & City Info Assistant")
 st.write("Ask about library policies, city meetings, and more.")
+st.caption(f"Model: {model_label}")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
