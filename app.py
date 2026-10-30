@@ -59,7 +59,19 @@ def pick_llm():
         context_window=8000,
     )
 
-
+#code to make references easier to read from file names
+def friendly_source(metadata: dict) -> str:
+    """Turn a chunk's file info into a readable source label."""
+    name = metadata.get("file_name", "Unknown document")
+    if name.startswith("video_"):
+        video_id = name[6:17]  # YouTube IDs are always 11 characters
+        title = name[18:].removesuffix(".txt")
+        return f"{title} (video: https://youtu.be/{video_id})"
+    if name.endswith(".pdf"):
+        page = metadata.get("source")  # the PDF reader stores the page number here
+        return f"{name.removesuffix('.pdf')}, page {page}" if page else name
+    return name
+    
 @st.cache_resource
 def load_agent():
     """Build (or load) the index and agent once, then reuse across all user interactions."""
@@ -84,7 +96,13 @@ def load_agent():
         """Useful for answering questions about library policies, procedures,
         city meeting content, and related documents."""
         response = await query_engine.aquery(query)
-        return str(response)
+        sources = []
+        for item in response.source_nodes:
+            label = friendly_source(item.node.metadata)
+            if label not in sources:  # skip repeats when several chunks come from one file
+                sources.append(label)
+        source_list = "\n".join(f"- {s}" for s in sources)
+        return f"{response}\n\nSources:\n{source_list}"
 
     agent = AgentWorkflow.from_tools_or_functions(
         [search_documents],
@@ -103,7 +121,10 @@ def load_agent():
 
         If the search_documents tool doesn't return relevant information, say
         plainly: "I couldn't find anything on that in our documents" — don't
-        guess or fill gaps with outside knowledge.""",
+        guess or fill gaps with outside knowledge.
+        
+        End every answer with the "Sources:" list from the search results,
+        copied exactly. Never add a source the tool didn't return."""""",
     )
     return agent, model_label
 
