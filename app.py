@@ -124,7 +124,7 @@ def load_agent():
         guess or fill gaps with outside knowledge.
         
         End every answer with the "Sources:" list from the search results,
-        copied exactly. Never add a source the tool didn't return."""""",
+        copied exactly. Never add a source the tool didn't return.""",
     )
     return agent, model_label
 
