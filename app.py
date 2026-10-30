@@ -7,6 +7,7 @@ logging.getLogger("llama_index").setLevel(logging.WARNING)
 
 import os
 import asyncio
+import threading
 import streamlit as st
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings, StorageContext, load_index_from_storage
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -83,6 +84,24 @@ def load_agent():
 
 agent = load_agent()
 
+@st.cache_resource
+def get_event_loop():
+    """One long-running event loop on a background thread, shared by all users.
+    The LlamaIndex agent must run inside a live loop, and reusing one loop keeps
+    its connections to Groq working from question to question."""
+    loop = asyncio.new_event_loop()
+    threading.Thread(target=loop.run_forever, daemon=True).start()
+    return loop
+
+
+def ask_agent(question: str) -> str:
+    async def _run():
+        return await agent.run(question)
+    future = asyncio.run_coroutine_threadsafe(_run(), get_event_loop())
+    return str(future.result(timeout=300))
+
+
+
 st.title("Library & City Info Assistant")
 st.write("Ask about library policies, city meetings, and more.")
 
@@ -100,7 +119,7 @@ if prompt := st.chat_input("Ask a question..."):
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = asyncio.run(agent.run(prompt))
+            response = ask_agent(prompt)
         st.markdown(str(response))
 
     st.session_state.messages.append({"role": "assistant", "content": str(response)})
