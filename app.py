@@ -70,7 +70,7 @@ def friendly_source(metadata: dict) -> str:
     if name.endswith(".pdf"):
         page = metadata.get("source")  # the PDF reader stores the page number here
         return f"{name.removesuffix('.pdf')}, page {page}" if page else name
-    return name
+    return name.rsplit(".", 1)[0]
     
 @st.cache_resource
 def load_agent():
