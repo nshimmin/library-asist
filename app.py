@@ -6,6 +6,7 @@ logging.getLogger("huggingface_hub").setLevel(logging.WARNING)
 logging.getLogger("llama_index").setLevel(logging.WARNING)
 
 import os
+import json
 import asyncio
 import threading
 import streamlit as st
@@ -59,10 +60,20 @@ def pick_llm():
         context_window=8000,
     )
 
+# Titles and web addresses recorded by the import scripts - see webimport.py
+try: 
+    with open("sources.json", encoding="utf-8") as f:
+        SOURCE_INFO = json.load(f)
+except FileNotFoundError:
+    SROUCE_INFO = {} # no catalog, so fall back to file names. 
+
 #code to make references easier to read from file names
 def friendly_source(metadata: dict) -> str:
     """Turn a chunk's file info into a readable source label."""
     name = metadata.get("file_name", "Unknown document")
+    info = SOURCE_INFO.get(name)
+    if info: 
+        return f"{info['title']} ({info['url']})"
     if name.startswith("video_"):
         video_id = name[6:17]  # YouTube IDs are always 11 characters
         title = name[18:].removesuffix(".txt")
