@@ -24,7 +24,12 @@ def load_agent():
     """Build (or load) the index and agent once, then reuse across all user interactions."""
     Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
-    api_key_val = os.environ.get("groq_api")
+    # Read the key from Streamlit secrets first, then fall back to an environment variable
+    try:
+        api_key_val = st.secrets.get("groq_api")
+    except Exception:
+        api_key_val = None
+    api_key_val = api_key_val or os.environ.get("groq_api")
     if not api_key_val:
         raise ValueError("groq_api secret not found. Add it in Streamlit Cloud: App settings → Secrets.")
 
