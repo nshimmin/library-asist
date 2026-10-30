@@ -1,0 +1,18 @@
+# Keys and secrets — never commit these
+sshkey*
+*.pem
+.env
+.streamlit/secrets.toml
+
+# Python clutter
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / cloud-workspace leftovers
+.vscode-server/
+.cursor-server/
+.windsurf-server/
+.idea/
+.bash_history

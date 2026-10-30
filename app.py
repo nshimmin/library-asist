@@ -26,7 +26,7 @@ def load_agent():
 
     api_key_val = os.environ.get("groq_api")
     if not api_key_val:
-        raise ValueError("GROQ_API_KEY not found. Check the secret name in Lightning AI settings.")
+        raise ValueError("groq_api secret not found. Add it in Streamlit Cloud: App settings → Secrets.")
 
     Settings.llm = Groq(
         api_key=api_key_val,
