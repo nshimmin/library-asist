@@ -1,33 +1,13 @@
 {
-  "name": "Python 3",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
-        "README.md",
-        "app.py"
-      ]
-    },
-    "vscode": {
-      "settings": {},
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance"
-      ]
-    }
-  },
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
-  "postAttachCommand": {
-    "server": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false"
-  },
+  // GitHub's standard Codespaces image. It's pre-loaded on GitHub's machines,
+  // so codespaces start in a minute or two instead of downloading an image.
+  // It already includes Python and git. Install packages as needed, e.g.:
+  //   pip install -r requirements.txt        (everything the app uses; slow)
+  //   pip install llama-index-readers-web    (just what webimport.py needs)
+  "name": "Library assistant (standard image)",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "forwardPorts": [8501],
   "portsAttributes": {
-    "8501": {
-      "label": "Application",
-      "onAutoForward": "openPreview"
-    }
-  },
-  "forwardPorts": [
-    8501
-  ]
+    "8501": { "label": "Streamlit app" }
+  }
 }
