@@ -7,12 +7,13 @@ logging.getLogger("llama_index").setLevel(logging.WARNING)
 
 import os
 import json
-from datetime import datetime
-from zoneinfo import ZoneInfo
-from llama_index.core.llms import ChatMessage
 import asyncio
 import threading
 import streamlit as st
+import requests
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from llama_index.core.llms import ChatMessage
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings, StorageContext, load_index_from_storage
 from llama_index.core.agent.workflow import AgentWorkflow
 from llama_index.core.node_parser import SentenceSplitter
@@ -33,6 +34,24 @@ def get_secret(name: str):
         value = None
     return value or os.environ.get(name)
 
+GAP_PHRASE = "couldn't find anything"
+
+def log_gap(question: str) -> None:
+    """Add an unanswered question to the GitHub Issue. Logs only the question and time."""
+    token = get_secret("github_token")
+    issue = get_secret("gap_issue_number")
+    if not token or not issue:
+        return  # gap log not set up, so skip quietly
+    when = datetime.now(ZoneInfo("America/Chicago")).strftime("%b %-d, %Y, %-I:%M %p")
+    try:
+        requests.post(
+            f"https://api.github.com/repos/nshimmin/library-asist/issues/{issue}/comments",
+            headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"},
+            json={"body": f"**{when}**\n> {question}"},
+            timeout=10,
+        )
+    except Exception:
+        pass  # never let the log break the chat
 
 # Fully open model (open weights, training data, and code) from Ai2, served via OpenRouter.
 OPEN_MODEL = "allenai/olmo-3.1-32b-instruct"
@@ -190,6 +209,8 @@ if prompt := st.chat_input("Ask a question..."):
         with st.spinner("Thinking..."):
             response = ask_agent(prompt)
         answer = str(response).replace("$", "\\$")
+        if GAP_PHRASE in answer.replace("’", "'").lower():
+            log_gap(prompt)
         st.markdown(answer)
 
     st.session_state.messages.append({"role": "assistant", "content": answer})
