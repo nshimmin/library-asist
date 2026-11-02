@@ -8,29 +8,39 @@ Search
 content/uploads/2026/04/NL_Library_Logo_Stacked.svg)
 ](https://northlibertylibrary.org)
 
-  * [Your Library](https://northlibertylibrary.org/about/)
+  * Your Library
+    * [About](https://northlibertylibrary.org/about/)
     * [Library Staff](https://northlibertylibrary.org/about/library-staff/)
     * [Library Board](https://northlibertyiowa.gov/board-commissions/#boards)
     * [Accessibility](https://northlibertylibrary.org/about/accessibility/)
-  * [Things to Do](https://northlibertylibrary.org/things-to-do/)
-  * [Resources](https://northlibertylibrary.org/resources/)
+  * Things to Do
+    * [Event Calendar](https://northlibertylibrary.org/things-to-do/)
+    * [Library Programs](https://northlibertylibrary.org/library-programs/)
+  * Resources
+    * [Digital Resources](https://northlibertylibrary.org/resources/)
     * [Room Reservations](https://northlibertylibrary.org/resources/room-reservations/)
     * [Materials Request](https://northlibertylibrary.org/resources/materials-request/)
     * [Blog & Podcasts](https://northlibertylibrary.org/blog-podcasts/)
-  * [Support](https://northlibertylibrary.org/support/)
+  * Support
+    * [Ways to Support](https://northlibertylibrary.org/support/)
     * [Friends of the Library](https://northlibertylibrary.org/friends-of-the-library/)
   * [Contact](https://northlibertylibrary.org/contact/)
 
-  * [Your Library](https://northlibertylibrary.org/about/)
+  * Your Library
+    * [About](https://northlibertylibrary.org/about/)
     * [Library Staff](https://northlibertylibrary.org/about/library-staff/)
     * [Library Board](https://northlibertyiowa.gov/board-commissions/#boards)
     * [Accessibility](https://northlibertylibrary.org/about/accessibility/)
-  * [Things to Do](https://northlibertylibrary.org/things-to-do/)
-  * [Resources](https://northlibertylibrary.org/resources/)
+  * Things to Do
+    * [Event Calendar](https://northlibertylibrary.org/things-to-do/)
+    * [Library Programs](https://northlibertylibrary.org/library-programs/)
+  * Resources
+    * [Digital Resources](https://northlibertylibrary.org/resources/)
     * [Room Reservations](https://northlibertylibrary.org/resources/room-reservations/)
     * [Materials Request](https://northlibertylibrary.org/resources/materials-request/)
     * [Blog & Podcasts](https://northlibertylibrary.org/blog-podcasts/)
-  * [Support](https://northlibertylibrary.org/support/)
+  * Support
+    * [Ways to Support](https://northlibertylibrary.org/support/)
     * [Friends of the Library](https://northlibertylibrary.org/friends-of-the-library/)
   * [Contact](https://northlibertylibrary.org/contact/)
 
@@ -50,7 +60,7 @@ We’re committed to providing access, equal opportunity and reasonable
 accommodation for individuals with disabilities to attend City events,
 participate in City programs and visit City facilities. For accommodations,
 please reach out to [[email protected]](/cdn-cgi/l/email-
-protection#80e3efededf5eee9e3e1f4e9efeef3c0eeeff2f4e8ece9e2e5f2f4f9e9eff7e1aeeff2e7)
+protection#32515d5f5f475c5b5153465b5d5c41725c5d40465a5e5b505740464b5b5d45531c5d4055)
 or call (319) 626-5726.
 
 ![""](https://northlibertylibrary.org/wp-content/uploads/2026/05/unnamed.png)
@@ -114,7 +124,7 @@ disabilities.
 Please let us know if you encounter accessibility barriers on North Liberty
 Library’s website:
 
-X/Twitter
+Facebook
 
 This field is for validation purposes and should be left unchanged.
 
@@ -147,22 +157,22 @@ North Liberty, IA 52317
 
   * [ (319) 626-5701 ](tel:3196265701)
 
-### Hours:
+### Hours
 
-Mon - Thurs: 8 AM - 8 PM  
-Fri: 8 AM - 5 PM  
-Sat: 10 AM - 5 PM  
-Sun: 1 PM - 4 PM
+Mon – Thurs: 8 AM – 8 PM  
+Fri: 8 AM – 5 PM  
+Sat: 10 AM – 5 PM  
+Sun: 1 PM – 4 PM
 
 ## Quick Links
 
   * [Privacy Policy](https://northlibertylibrary.org/privacy-policy/)
   * [Accessibility Statement](https://northlibertylibrary.org/about/accessibility/)
-  * Sitemap
+  * [Sitemap](https://northlibertylibrary.org/sitemap/)
 
   * [Privacy Policy](https://northlibertylibrary.org/privacy-policy/)
   * [Accessibility Statement](https://northlibertylibrary.org/about/accessibility/)
-  * Sitemap
+  * [Sitemap](https://northlibertylibrary.org/sitemap/)
 
 ## Documents
 
