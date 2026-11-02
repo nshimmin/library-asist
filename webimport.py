@@ -11,6 +11,7 @@ urls = [
     "https://northlibertylibrary.org/program/seeds-plants-and-gardening/",
     "https://northlibertylibrary.org/resources/",
     "https://northlibertylibrary.org/resources/room-reservations/",
+    "https://northliberty-ia.whofi.com/",
 ]
 
 Path("data").mkdir(exist_ok=True)
