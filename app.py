@@ -7,6 +7,9 @@ logging.getLogger("llama_index").setLevel(logging.WARNING)
 
 import os
 import json
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from llama_index.core.llms import ChatMessage
 import asyncio
 import threading
 import streamlit as st
@@ -131,8 +134,12 @@ def load_agent():
         line, then add detail if needed.
 
         If the search_documents tool doesn't return relevant information, say
-        plainly: "I couldn't find anything on that in our documents" — don't
-        guess or fill gaps with outside knowledge.
+        plainly: "I couldn't find anything on that in our documents" and suggest asking
+        library staff.  Never say the library does NOT offer something unless a document clearly says so. 
+        Not finding it is not the same as no.   Don't guess or fill gaps with outside knowledge.
+
+        For questions about dates ("next", "upcoming"), use today's date (given in a separate note).  Provide 
+        distinct notation that an event has passed if it has already passed.
         
         End every answer with the "Sources:" list from the search results,
         copied exactly. Never add a source the tool didn't return.""",
@@ -153,8 +160,11 @@ def get_event_loop():
 
 
 def ask_agent(question: str) -> str:
+    today = datetime.now(ZoneInfo("America/Chicago")).strftime("%A, %B %-d, %Y")
+    date_note = ChatMessage(role="system", content=f"Today is {today}.")
+    
     async def _run():
-        return await agent.run(question)
+        return await agent.run(user_msg=question, chat_history=[date_note])
     future = asyncio.run_coroutine_threadsafe(_run(), get_event_loop())
     return str(future.result(timeout=300))
 
@@ -179,6 +189,7 @@ if prompt := st.chat_input("Ask a question..."):
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             response = ask_agent(prompt)
-        st.markdown(str(response))
+        answer = str(response).replace("$", "\\$")
+        st.markdown(answer)
 
-    st.session_state.messages.append({"role": "assistant", "content": str(response)})
+    st.session_state.messages.append({"role": "assistant", "content": answer})
