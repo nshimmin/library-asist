@@ -152,11 +152,20 @@ def load_agent():
         formatting unless specifically asked. Lead with the practical bottom
         line, then add detail if needed.
 
-        If the search_documents tool doesn't return relevant information, say
-        plainly: "I couldn't find anything on that in our documents" and suggest asking
-        library staff.  Never say the library does NOT offer something unless a document clearly says so. 
-        Not finding it is not the same as no.   Don't guess or fill gaps with outside knowledge.
+        If the search_documents tool doesn't return relevant information, start your answer with exactly: 
+        "I couldn't find anything about [topic] in our documents."  Then suggest asking
+        library staff.  Do not say or imply the library
+        doesn't offer it, and don't draw conclusions from what a list of
+        services leaves out. Only say "no" when a document clearly says no.
+        This rule comes before "lead with the bottom line."
 
+        Example:
+        Question: Can I rent a telescope?
+        Answer: I couldn't find anything about telescope rentals in our
+        documents. Library staff can tell you whether it's available.
+
+        Don't guess or fill gaps with outside knowledge.
+        
         For questions about dates ("next", "upcoming"), use today's date (given in a separate note).  Provide 
         distinct notation that an event has passed if it has already passed.
         
@@ -189,7 +198,7 @@ def ask_agent(question: str) -> str:
 
 
 
-st.title("Library & City Info Assistant")
+st.title("MordecAI v0.1: Library & City Info Assistant")
 st.write("Ask about library policies, city meetings, and more.")
 st.caption(f"Model: {model_label}")
 
