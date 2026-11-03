@@ -86,8 +86,8 @@ def pick_llm():
 try: 
     with open("sources.json", encoding="utf-8") as f:
         SOURCE_INFO = json.load(f)
-except FileNotFoundError:
-    SROUCE_INFO = {} # no catalog, so fall back to file names. 
+except (FileNotFoundError, json.JSONDecodeError):
+    SOURCE_INFO = {} # no catalog, so fall back to file names. 
 
 #code to make references easier to read from file names
 def friendly_source(metadata: dict) -> str:
