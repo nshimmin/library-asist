@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from llama_index.readers.web import SimpleWebPageReader
+import trafilatura
 
 urls = [
     "https://northlibertylibrary.org/about/accessibility/",
@@ -22,15 +22,28 @@ Path("data").mkdir(exist_ok=True)
 sources_file = Path("sources.json")
 sources = json.loads(sources_file.read_text()) if sources_file.exists() else {}
 
-documents = SimpleWebPageReader(html_to_text=True).load_data(urls=urls)
-
-for i, (url, doc) in enumerate(zip(urls, documents)):
+for i, url in enumerate(urls):
     filename = f"web_{i}.txt" 
-    (Path("data") / filename).write_text(doc.text, encoding="utf-8")
-    # Use the page's first heading ("# Book Bike") as its title; fall back to the URL
-    title = next((line[2:].strip() for line in doc.text.splitlines() if line.startswith("# ")), url)
+
+    html = trafultura.fetch_url(url)
+    if html is None: 
+        print(f"Couldn't download {url} - keeping the old copy of {filename}")
+        continue
+    
+    #finds the page's main content and drops menus, footers, and ads.
+    # favor_recall=True leans toward keeping text when it isn't sure.
+    text = trafilatura.extract(html, output_format="markdown", include_links=False,
+                               include_tables=True, favor_recall=True)
+    if not text:
+        print(f"No main content found on {url} - keeping the old copy of {filename}")
+        continue
+    
+    (Path("data") / filename).write_text(text, encoding="utf-8")
+    
+    meta = trafilatura.extract_metadata(html)
+    title = meta.title if meta and meta.title else url
     sources[filename] = {"title": title, "url": url}
-    print(f"Saved {filename}: {title}")
+    print(f"Saved {filename}: {title} ({len(text):,} characters)")
 
 sources_file.write_text(json.dumps(sources, indent=2), encoding="utf-8")
 print(f"Updated {sources_file}")
