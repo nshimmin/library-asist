@@ -15,7 +15,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from llama_index.core.llms import ChatMessage
 from llama_index.core import Settings, StorageContext, load_index_from_storage
-from llama_index.core.agent.workflow import AgentWorkflow
+from llama_index.core.agent.workflow import AgentWorkflow, ToolCallResult
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from search import EMBED_MODEL, HybridSearch   # shared search settings (see search.py)
 from llama_index.llms.groq import Groq
@@ -185,15 +185,37 @@ def get_event_loop():
     return loop
 
 
-def ask_agent(question: str) -> str:
+def ask_agent(question: str):
+    """Ask the agent a question. Returns (answer, searches), where searches lists
+    each search the agent ran: what it searched for and what it got back."""
     today = datetime.now(ZoneInfo("America/Chicago")).strftime("%A, %B %-d, %Y")
     date_note = ChatMessage(role="system", content=f"Today is {today}.")
-    
-    async def _run():
-        return await agent.run(user_msg=question, chat_history=[date_note])
-    future = asyncio.run_coroutine_threadsafe(_run(), get_event_loop())
-    return str(future.result(timeout=300))
 
+    async def _run():
+        handler = agent.run(user_msg=question, chat_history=[date_note])
+        searches = []
+        # The agent reports each step as an "event"; keep the results of its tool calls
+        async for event in handler.stream_events():
+            if isinstance(event, ToolCallResult):
+                searches.append({"query": event.tool_kwargs.get("query", str(event.tool_kwargs)),
+                                 "results": str(event.tool_output)})
+        response = await handler
+        return str(response), searches
+
+    future = asyncio.run_coroutine_threadsafe(_run(), get_event_loop())
+    return future.result(timeout=300)
+
+
+def show_searches(searches):
+    """A fold-out section under an answer showing what the assistant searched for
+    and the passages it was given. Useful for checking answers."""
+    if not searches:
+        return
+    label = "search" if len(searches) == 1 else "searches"
+    with st.expander(f"How I found this ({len(searches)} {label})"):
+        for s in searches:
+            st.markdown(f"**Searched for:** {s['query']}".replace("$", "\\$"))
+            st.text(s["results"])
 
 
 st.title("MordecAI v0.1: Library & City Info Assistant")
@@ -206,6 +228,7 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+        show_searches(message.get("searches"))
 
 if prompt := st.chat_input("Ask a question..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -214,10 +237,11 @@ if prompt := st.chat_input("Ask a question..."):
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = ask_agent(prompt)
+            response, searches = ask_agent(prompt)
         answer = str(response).replace("$", "\\$")
         if GAP_PHRASE in answer.replace("’", "'").lower():
             log_gap(prompt)
         st.markdown(answer)
+        show_searches(searches)
 
-    st.session_state.messages.append({"role": "assistant", "content": answer})
+    st.session_state.messages.append({"role": "assistant", "content": answer, "searches": searches})
