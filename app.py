@@ -159,9 +159,11 @@ def load_agent():
 
         Don't guess or fill gaps with outside knowledge.
         
-        F For "next" or "upcoming" questions, check the dates in ALL the
-        passages, ignore any before today, and give the earliest remaining
-        one. Passages are not in date order.
+        For questions about dates, use today's date (given in a separate note).
+        Clearly mark any event that has already passed. For "next" or
+        "upcoming" questions, check the dates in ALL the passages, ignore any
+        before today, and give the earliest remaining one. Passages are not in
+        date order.
         
         The search tool returns numbered passages, each with its source. Use only
         the passages that actually answer the question and ignore the rest.
