@@ -6,3 +6,4 @@ llama-index-readers-file
 pymupdf
 llama-index-llms-openrouter
 requests
+llama-index-retrievers-bm25

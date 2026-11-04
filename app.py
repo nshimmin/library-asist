@@ -14,12 +14,10 @@ import requests
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from llama_index.core.llms import ChatMessage
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings, StorageContext, load_index_from_storage
+from llama_index.core import Settings, StorageContext, load_index_from_storage
 from llama_index.core.agent.workflow import AgentWorkflow
-from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core.readers.base import BaseReader
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.readers.file import PyMuPDFReader
+from search import EMBED_MODEL, HybridSearch   # shared search settings (see search.py)
 from llama_index.llms.groq import Groq
 from llama_index.llms.openrouter import OpenRouter
 
@@ -108,34 +106,29 @@ def friendly_source(metadata: dict) -> str:
 @st.cache_resource
 def load_agent():
     """Build (or load) the index and agent once, then reuse across all user interactions."""
-    Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+    Settings.embed_model = HuggingFaceEmbedding(model_name=EMBED_MODEL)
 
     model_label, Settings.llm = pick_llm()
 
-    Settings.text_splitter = SentenceSplitter(chunk_size=512, chunk_overlap=50)
-
-    if os.path.exists(os.path.join(PERSIST_DIR, "docstore.json")):
-        storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
-        index = load_index_from_storage(storage_context)
-    else:
-        file_extractor: dict[str, BaseReader] = {".pdf": PyMuPDFReader()}
-        documents = SimpleDirectoryReader("data", file_extractor=file_extractor).load_data()
-        index = VectorStoreIndex.from_documents(documents)
-        index.storage_context.persist(persist_dir=PERSIST_DIR)
-
-    query_engine = index.as_query_engine(similarity_top_k=5)
+    # The index is built ahead of time by build_index.py (in Codespaces) and committed.
+    if not os.path.exists(os.path.join(PERSIST_DIR, "docstore.json")):
+        raise FileNotFoundError("No search index found. Run build_index.py and push the storage folder.")
+    index = load_index_from_storage(StorageContext.from_defaults(persist_dir=PERSIST_DIR))
+    searcher = HybridSearch(index)   # meaning + keyword search, then reranker
 
     async def search_documents(query: str) -> str:
-        """Useful for answering questions about library policies, procedures,
-        city meeting content, and related documents."""
-        response = await query_engine.aquery(query)
-        sources = []
-        for item in response.source_nodes:
-            label = friendly_source(item.node.metadata)
-            if label not in sources:  # skip repeats when several chunks come from one file
-                sources.append(label)
-        source_list = "\n".join(f"- {s}" for s in sources)
-        return f"{response}\n\nSources:\n{source_list}"
+        """Search the library's and city's documents (policies, services, web
+        pages, the staff FAQ, board information, and city meeting records).
+        Returns numbered passages, each labeled with its source."""
+        # The reranker takes a few seconds; run it off the main loop so other users aren't blocked
+        passages = await asyncio.to_thread(searcher.search, query)
+        if not passages:
+            return "No relevant passages found."
+        blocks = []
+        for i, n in enumerate(passages, 1):
+            source = friendly_source(n.node.metadata)
+            blocks.append(f"[{i}] Source: {source}\n{n.node.get_content().strip()}")
+        return "\n\n---\n\n".join(blocks)
 
     agent = AgentWorkflow.from_tools_or_functions(
         [search_documents],
@@ -169,8 +162,13 @@ def load_agent():
         For questions about dates ("next", "upcoming"), use today's date (given in a separate note).  Provide 
         distinct notation that an event has passed if it has already passed.
         
-        End every answer with the "Sources:" list from the search results,
-        copied exactly. Never add a source the tool didn't return.""",
+        The search tool returns numbered passages, each with its source. Use only
+        the passages that actually answer the question and ignore the rest.
+        End every answer with "Sources:" followed by the source of each passage
+        you used, one per line starting with "- ", copied exactly as given.
+        Never list a source you didn't use or the tool didn't return. If no
+        passage answers the question, follow the "couldn't find" rule above
+        and list no sources.""",
     )
     return agent, model_label
 
