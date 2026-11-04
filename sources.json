@@ -32,14 +32,14 @@
     "url": "https://northlibertylibrary.org/resources/room-reservations/"
   },
   "web_8.txt": {
-    "title": "https://northliberty-ia.whofi.com/",
+    "title": "Event Calendar |",
     "url": "https://northliberty-ia.whofi.com/"
   },
   "web_9.txt": {
-    "title": "Board & Commissions",
+    "title": "Board & Commissions | City of North Liberty",
     "url": "https://northlibertyiowa.gov/board-commissions/"
   },
-   "Library Services FAQ.txt": {
+  "Library Services FAQ.txt": {
     "title": "Library Services FAQ (staff-maintained)",
     "url": "https://github.com/nshimmin/library-asist/blob/main/data/Library%20Services%20FAQ.txt"
   }

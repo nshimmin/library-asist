@@ -1,387 +1,197 @@
-Skip to content
-
-Search
-
-[ Announcements ](/city-announcements/)
-
-[ ![City of North Liberty
-Logo](data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==)
-](https://northlibertyiowa.gov)
-
-  * Our Community
-    * [About Us](https://northlibertyiowa.gov/about-us/)
-    * [Residents](https://northlibertyiowa.gov/residents/)
-    * [Business](https://northlibertyiowa.gov/business/)
-    * [Projects](https://northlibertyiowa.gov/projects/)
-    * [52317 podcast](https://northlibertyiowa.gov/category/52317-podcast/)
-  * Things to Do
-    * [Recreation](https://northlibertyiowa.gov/recreation/)
-    * [Events](https://northlibertyiowa.gov/events/)
-    * [Parks & Trails](https://northlibertyiowa.gov/parks-trails/)
-    * [Hy-Vee Center & Amphitheater](https://northlibertyiowa.gov/hy-vee-center-amphitheater/)
-    * [Reservations & Rentals](https://northlibertyiowa.gov/reservations-rentals/)
-    * [Library](https://northlibertylibrary.org/)
-  * Services
-    * [Utilities](https://northlibertyiowa.gov/utilities/)
-    * [Trash & Recycle](https://northlibertyiowa.gov/trash-recycle/)
-    * [Permits](https://northlibertyiowa.gov/permits/)
-    * [Pets & Animals](https://northlibertyiowa.gov/pets-animals/)
-    * [Community Safety](https://northlibertyiowa.gov/community-safety/)
-    * [Transit](https://northlibertyiowa.gov/transit/)
-  * Government
-    * [City Council](https://northlibertyiowa.gov/city-council/)
-    * [Board & Commissions](https://northlibertyiowa.gov/board-commissions/)
-    * [Meetings & Agendas](https://northlibertyiowa.portal.civicclerk.com/)
-    * [Planning, Building, & Development](https://northlibertyiowa.gov/planning-building-development/)
-    * [City Hall](https://northlibertyiowa.gov/city-hall/)
-  * [Contact](https://northlibertyiowa.gov/contact/)
-
-  * Our Community
-    * [About Us](https://northlibertyiowa.gov/about-us/)
-    * [Residents](https://northlibertyiowa.gov/residents/)
-    * [Business](https://northlibertyiowa.gov/business/)
-    * [Projects](https://northlibertyiowa.gov/projects/)
-    * [52317 podcast](https://northlibertyiowa.gov/category/52317-podcast/)
-  * Things to Do
-    * [Recreation](https://northlibertyiowa.gov/recreation/)
-    * [Events](https://northlibertyiowa.gov/events/)
-    * [Parks & Trails](https://northlibertyiowa.gov/parks-trails/)
-    * [Hy-Vee Center & Amphitheater](https://northlibertyiowa.gov/hy-vee-center-amphitheater/)
-    * [Reservations & Rentals](https://northlibertyiowa.gov/reservations-rentals/)
-    * [Library](https://northlibertylibrary.org/)
-  * Services
-    * [Utilities](https://northlibertyiowa.gov/utilities/)
-    * [Trash & Recycle](https://northlibertyiowa.gov/trash-recycle/)
-    * [Permits](https://northlibertyiowa.gov/permits/)
-    * [Pets & Animals](https://northlibertyiowa.gov/pets-animals/)
-    * [Community Safety](https://northlibertyiowa.gov/community-safety/)
-    * [Transit](https://northlibertyiowa.gov/transit/)
-  * Government
-    * [City Council](https://northlibertyiowa.gov/city-council/)
-    * [Board & Commissions](https://northlibertyiowa.gov/board-commissions/)
-    * [Meetings & Agendas](https://northlibertyiowa.portal.civicclerk.com/)
-    * [Planning, Building, & Development](https://northlibertyiowa.gov/planning-building-development/)
-    * [City Hall](https://northlibertyiowa.gov/city-hall/)
-  * [Contact](https://northlibertyiowa.gov/contact/)
-
-  * [Announcements](https://northlibertyiowa.gov/city-announcements/)
-  * [Online Bill Pay](https://www.municipalonlinepayments.com/northlibertyia)
-  * Our Community
-    * [About Us](https://northlibertyiowa.gov/about-us/)
-    * [Residents](https://northlibertyiowa.gov/residents/)
-    * [Business](https://northlibertyiowa.gov/business/)
-    * [Projects](https://northlibertyiowa.gov/projects/)
-  * Things to Do
-    * [Recreation](https://northlibertyiowa.gov/recreation/)
-    * [Events](https://northlibertyiowa.gov/events/)
-    * [Parks & Trails](https://northlibertyiowa.gov/parks-trails/)
-    * [Hy-Vee Center & Amphitheater](https://northlibertyiowa.gov/hy-vee-center-amphitheater/)
-    * [Reservations & Rentals](https://northlibertyiowa.gov/reservations-rentals/)
-    * [Library](https://northlibertylibrary.org/)
-  * Services
-    * [Utilities](https://northlibertyiowa.gov/utilities/)
-    * [Trash & Recycle](https://northlibertyiowa.gov/trash-recycle/)
-    * [Permits](https://northlibertyiowa.gov/permits/)
-    * [Pets & Animals](https://northlibertyiowa.gov/pets-animals/)
-    * [Community Safety](https://northlibertyiowa.gov/community-safety/)
-    * [Transit](https://northlibertyiowa.gov/transit/)
-  * Government
-    * [City Council](https://northlibertyiowa.gov/city-council/)
-    * [Board & Commissions](https://northlibertyiowa.gov/board-commissions/)
-    * [Meetings & Agendas](https://northlibertyiowa.portal.civicclerk.com/)
-    * [Planning, Building, & Development](https://northlibertyiowa.gov/planning-building-development/)
-    * [City Hall](https://northlibertyiowa.gov/city-hall/)
-  * [Contact](https://northlibertyiowa.gov/contact/)
-
-  * [Announcements](https://northlibertyiowa.gov/city-announcements/)
-  * [Online Bill Pay](https://www.municipalonlinepayments.com/northlibertyia)
-  * Our Community
-    * [About Us](https://northlibertyiowa.gov/about-us/)
-    * [Residents](https://northlibertyiowa.gov/residents/)
-    * [Business](https://northlibertyiowa.gov/business/)
-    * [Projects](https://northlibertyiowa.gov/projects/)
-  * Things to Do
-    * [Recreation](https://northlibertyiowa.gov/recreation/)
-    * [Events](https://northlibertyiowa.gov/events/)
-    * [Parks & Trails](https://northlibertyiowa.gov/parks-trails/)
-    * [Hy-Vee Center & Amphitheater](https://northlibertyiowa.gov/hy-vee-center-amphitheater/)
-    * [Reservations & Rentals](https://northlibertyiowa.gov/reservations-rentals/)
-    * [Library](https://northlibertylibrary.org/)
-  * Services
-    * [Utilities](https://northlibertyiowa.gov/utilities/)
-    * [Trash & Recycle](https://northlibertyiowa.gov/trash-recycle/)
-    * [Permits](https://northlibertyiowa.gov/permits/)
-    * [Pets & Animals](https://northlibertyiowa.gov/pets-animals/)
-    * [Community Safety](https://northlibertyiowa.gov/community-safety/)
-    * [Transit](https://northlibertyiowa.gov/transit/)
-  * Government
-    * [City Council](https://northlibertyiowa.gov/city-council/)
-    * [Board & Commissions](https://northlibertyiowa.gov/board-commissions/)
-    * [Meetings & Agendas](https://northlibertyiowa.portal.civicclerk.com/)
-    * [Planning, Building, & Development](https://northlibertyiowa.gov/planning-building-development/)
-    * [City Hall](https://northlibertyiowa.gov/city-hall/)
-  * [Contact](https://northlibertyiowa.gov/contact/)
-
-[ Online Bill Pay ](https://www.municipalonlinepayments.com/northlibertyia)
-
-![](data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==)
-
-# Board & Commissions
-
-![](data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==)
-
 ## Help Set Our Direction
 
-Volunteers, appointed by North Liberty’s Mayor and confirmed by the City
-Council, help advise on a wide range of areas, including land use and zoning,
-parks and recreation programs, and library policy.
+Volunteers, appointed by North Liberty’s Mayor and confirmed by the City Council, help advise on a wide range of areas, including land use and zoning, parks and recreation programs, and library policy.
 
-Appointment to a volunteer board or commission means you can make a difference
-in many aspects of community development. Take this opportunity to volunteer
-your time to serve on any one of the following. Most terms begin on July 1 of
-each year, but openings sometimes occur during the year.
+Appointment to a volunteer board or commission means you can make a difference in many aspects of community development. Take this opportunity to volunteer your time to serve on any one of the following. Most terms begin on July 1 of each year, but openings sometimes occur during the year.
 
 ## Board & Commission Meetings
 
-Board and commission meetings are open to the public and typically meet on a
-recurring cycle in the City Council Chambers at City HAll, 360 N. Main St. You
-can attend these meetings live in person, or watch them live online.
-
-[ Agendas, Minutes & Videos ](https://northlibertyiowa.portal.civicclerk.com/)
+Board and commission meetings are open to the public and typically meet on a recurring cycle in the City Council Chambers at City HAll, 360 N. Main St. You can attend these meetings live in person, or watch them live online.
 
 ## Apply to Serve
 
-Applications are available at City Hall, 360 N. Main Street or online.
-Completed applications can be submitted at City Hall or via email to [[email
-protected]](/cdn-cgi/l/email-
-protection#dd89afbcbeb8a490a8b1bebcb5b8a49db3b2afa9b5b1b4bfb8afa9a4b4b2aabcf3bab2ab).
-Applicants must be 18 years old and a legal resident of the city.
+Applications are available at City Hall, 360 N. Main Street or online. Completed applications can be submitted at City Hall or via email to \[email protected\]. Applicants must be 18 years old and a legal resident of the city.
 
-Appointments are made by the Mayor with the City Council’s approval.
-Commissions that assist in department overview and making recommendations to
-City Council. Members are appointed by the mayor and approved by the city
-council.
-
-[ Online Application ](/board-commissions/apply-to-serve/)
+Appointments are made by the Mayor with the City Council’s approval. Commissions that assist in department overview and making recommendations to City Council. Members are appointed by the mayor and approved by the city council.
 
 ## Boards, Committees & Commissions
 
-Board of Adjustment
+## Board of Adjustment
 
-A five-member board charged with approving variances and conditional uses for
-buildings in North Liberty. It meets as needed.
+A five-member board charged with approving variances and conditional uses for buildings in North Liberty. It meets as needed.
 
-**Laura Hefley**  
-July 2021 - June 2026
+**Laura Hefley**
 
-**Janet Norton**  
-July 2022 - June 2027
+July 2021 – June 2026
 
-**Alan Wieskamp**  
-July 2023 - June 2028
+**Janet Norton**
 
-**Josh Rechkemmer**  
-July 2024 - June 2029
+July 2022 – June 2027
 
-**Eric Ruttum**  
-July 2025 - June 2030
+**Alan Wieskamp**
 
-Board of Appeals
+July 2023 – June 2028
 
-A five-member board charged with hearing appeals regarding the application and
-interpretation of the North Liberty building code. It meets as needed.
+**Josh Rechkemmer**
 
-**Anna Lenoch**  
+July 2024 – June 2029
+
+**Eric Ruttum**
+
+July 2025 – June 2030
+
+## Board of Appeals
+
+A five-member board charged with hearing appeals regarding the application and interpretation of the North Liberty building code. It meets as needed.
+
+**Anna Lenoch**
+
 Through June 2027
 
-**Joshua Scanlon**  
+**Joshua Scanlon**
+
 Through June 2028
 
-**Andrew Ballard**  
+**Andrew Ballard**
+
 Through June 2029
 
-**David West**  
+**David West**
+
 Through June 2030
 
-**Kevin Kurka**  
+**Kevin Kurka**
+
 Through June 2031
 
-Cemetery Board
+## Cemetery Board
 
-A six-member board (three from North Liberty and three from Penn Township)
-charged with overseeing Ridgewood Cemetery on Scales Bend Road. It usually
-meets the first Monday of February, April and November. Its meetings are not
-held in Council Chambers, recorded, streamed.
+A six-member board (three from North Liberty and three from Penn Township) charged with overseeing Ridgewood Cemetery on Scales Bend Road. It usually meets the first Monday of February, April and November. Its meetings are not held in Council Chambers, recorded, streamed.
 
-**Derek Burns**  
-July 2023 - June 2026
+**Derek Burns**
 
-**Erika Wade**  
+July 2023 – June 2026
+
+**Erika Wade**
+
 July 2024 – June 2027
 
-**Nicole Tscharner**  
+**Nicole Tscharner**
+
 July 2025 – June 2028
 
-Library Board of Trustees
+## Library Board of Trustees
 
-A six-member board, with one member from unincorporated Johnson County,
-charged with overseeing the North Liberty Community Library. It usually meets
-the third Monday of the month.
+A six-member board, with one member from unincorporated Johnson County, charged with overseeing the North Liberty Community Library. It usually meets the third Monday of the month.
 
-**Scott Kramer**  
+**Scott Kramer**
+
 July 2024 – June 2027
 
-**Brandy Greene**  
+**Brandy Greene**
+
 July 2024 – June 2027
 
-**Scott Clemons**  
+**Scott Clemons**
+
 July 2025 – June 2028
 
-**Angela Fogt**  
+**Angela Fogt**
+
 July 2025 – June 2028
 
-**Stefanie Munsterman**  
-July 2026 - June 2029
+**Stefanie Munsterman**
 
-**Becky Renneckar**(County)  
-July 2026 - June 2029
-
-Parks and Recreation Commission
-
-A seven-member board charged with reviewing and recommending policies,
-ordinance and budgets related to the city’s parks, playgrounds and recreation
-facilities. It usually meets on the first Thursday of each month.
-
-**Kevin Smith**  
-July 2024 - June 2027
-
-**Donglin Chai**  
-July 2024 - June 2027
-
-**Gwen Johnson**  
-July 2024 - June 2027
-
-**Nicholas Arnold**  
-July 2025 – June 2028
-
-**Jeremy Parrish**  
-July 2025 – June 2028
-
-**Nathan Timmel**  
-July 2026 - June 2029
-
-**Sheila Geneser**  
-July 2026 - June 2029
-
-Planning Commission
-
-A seven-member board charged with overseeing the city’s comprehensive plan,
-zoning code, reviewing conditional permits, and other planning and zoning
-issues. It usually meets the first Tuesday of each month.
-
-**Dave Willer**  
-July 2024 – June 2027
-
-**Rachael Schmerbach**  
-July 2024 – June 2027
-
-**Josey Bathke**  
-July 2025 – June 2028
-
-**Zach Mickelson**  
-July 2025 – June 2028
-
-**Nick Osmonson**  
 July 2026 – June 2029
 
-**Jeremy McIntosh**  
+**Becky Renneckar** (County)
+
 July 2026 – June 2029
 
-**Derek Cornett**  
-July 2026 – June 2029
+## Parks and Recreation Commission
 
-Tree & Storm Water Advisory Board
+A seven-member board charged with reviewing and recommending policies, ordinance and budgets related to the city’s parks, playgrounds and recreation facilities. It usually meets on the first Thursday of each month.
 
-An advisory board with five voting members charged with overseeing the city’s
-comprehensive City Tree Plan, the implementation of public education and
-programs for care and clean up of trees and waterways, and more. It meets
-quarterly.
+**Kevin Smith**
 
-**Daniel Green**  
 July 2024 – June 2027
 
-**David James**  
+**Donglin Chai**
+
+July 2024 – June 2027
+
+**Gwen Johnson**
+
+July 2024 – June 2027
+
+**Nicholas Arnold**
+
 July 2025 – June 2028
 
-**Clay Gavin**  
+**Jeremy Parrish**
+
 July 2025 – June 2028
 
-**Abdouramane Bila**  
-July 2026 - June 2029
+**Nathan Timmel**
 
-**Darice Baxter**  
-July 2026 - June 2029
+July 2026 – June 2029
 
-Search
+**Sheila Geneser**
 
-![North Liberty
-Home](data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==)
+July 2026 – June 2029
 
-Facebook-f Instagram Youtube
+## Planning Commission
 
-## Contact
+A seven-member board charged with overseeing the city’s comprehensive plan, zoning code, reviewing conditional permits, and other planning and zoning issues. It usually meets the first Tuesday of each month.
 
-### City Hall:
+**Dave Willer**
 
-360 N. Main Street  
-North Liberty, Iowa 52317
+July 2024 – June 2027
 
-  * [ (319) 626-5700 ](tel:3196265700)
+**Rachael Schmerbach**
 
-### Mailing Address:
+July 2024 – June 2027
 
-PO Box 77  
-North Liberty, Iowa 52317
+**Josey Bathke**
 
-## Explore
+July 2025 – June 2028
 
-  * [Recreation](https://northlibertyiowa.gov/recreation/)
-  * [Utilities](https://northlibertyiowa.gov/utilities/)
-  * [City Jobs](https://www.governmentjobs.com/careers/northlibertyia)
-  * [Events](https://northlibertyiowa.gov/events/)
-  * [Blog](https://northlibertyiowa.gov/blog/)
+**Zach Mickelson**
 
-  * [Recreation](https://northlibertyiowa.gov/recreation/)
-  * [Utilities](https://northlibertyiowa.gov/utilities/)
-  * [City Jobs](https://www.governmentjobs.com/careers/northlibertyia)
-  * [Events](https://northlibertyiowa.gov/events/)
-  * [Blog](https://northlibertyiowa.gov/blog/)
+July 2025 – June 2028
 
-## Quick Links
+**Nick Osmonson**
 
-  * [Accounts Payable](https://northlibertyiowa.gov/accounts-payable/)
-  * [Title VI Non-discrimination](https://northlibertyiowa.gov/city-hall/title-vi-non-discrimination-policy-statement/)
-  * [Privacy Policy](https://northlibertyiowa.gov/privacy-policy/)
-  * [Accessibility Statement](https://northlibertyiowa.gov/accessibility-statement/)
-  * [Sitemap](/sitemap/)
+July 2026 – June 2029
 
-  * [Accounts Payable](https://northlibertyiowa.gov/accounts-payable/)
-  * [Title VI Non-discrimination](https://northlibertyiowa.gov/city-hall/title-vi-non-discrimination-policy-statement/)
-  * [Privacy Policy](https://northlibertyiowa.gov/privacy-policy/)
-  * [Accessibility Statement](https://northlibertyiowa.gov/accessibility-statement/)
-  * [Sitemap](/sitemap/)
+**Jeremy McIntosh**
 
-## Join Our Newsletter
+July 2026 – June 2029
 
-Subscribe to get latest updates & news
+**Derek Cornett**
 
-Name(Required)
+July 2026 – June 2029
 
-First Last
+## Tree & Storm Water Advisory Board
 
-Email(Required)
+An advisory board with five voting members charged with overseeing the city’s comprehensive City Tree Plan, the implementation of public education and programs for care and clean up of trees and waterways, and more. It meets quarterly.
 
-Submit
+**Daniel Green**
 
-Δ
+July 2024 – June 2027
 
+**David James**
+
+July 2025 – June 2028
+
+**Clay Gavin**
+
+July 2025 – June 2028
+
+**Abdouramane Bila**
+
+July 2026 – June 2029
+
+**Darice Baxter**
+
+July 2026 – June 2029
