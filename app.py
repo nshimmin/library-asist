@@ -172,7 +172,9 @@ def load_agent():
         date order.
         
         The search tool returns numbered passages, each with its source. Use only
-        the passages that actually answer the question and ignore the rest.
+        the passages that actually answer the question and ignore the rest. Do not put citation marks in the answer itself: no bracketed numbers
+        and no symbols like 【1】. The "Sources:" list at the end is the only
+        citation.
         End every answer with "Sources:" followed by the source of each passage
         you used, one per line starting with "- ", copied exactly as given.
         Never list a source you didn't use or the tool didn't return. If no
