@@ -4,5 +4,5 @@ The North Liberty Library’s meeting and study spaces are available during oper
 
 Choose your date, start time, end time (up to three hours), and group size, then select Search to view available spaces. Once you’ve selected a room, you’ll be prompted to enter your reservation details, including your name, phone number, and email.
 
-- An individual or group may have up to four (3) reservations scheduled at a time.
+- An individual or group may have up to three (3) reservations scheduled at a time.
 - Meeting/study rooms may be reserved for a maximum of three (3) hours unless prearranged; extensions may be permitted upon request if space is available.
