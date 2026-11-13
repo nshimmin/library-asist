@@ -119,7 +119,13 @@ def load_agent():
     async def search_documents(query: str) -> str:
         """Search the library's and city's documents (policies, services, web
         pages, the staff FAQ, board information, and city meeting records).
-        Returns numbered passages, each labeled with its source."""
+        Write a short query from the key words in the question, for example
+        "notary" or "printing cost". Keep the name of any department, board,
+        or program the question is about, such as "library board" or "parks
+        commission". Do not add "North Liberty" or other words the person
+        didn't use: every document already mentions North Liberty, and
+        extra words hide the best match. Returns numbered passages, each
+        labeled with its source."""
         # The reranker takes a few seconds; run it off the main loop so other users aren't blocked
         passages = await asyncio.to_thread(searcher.search, query)
         if not passages:
