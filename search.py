@@ -10,6 +10,12 @@ The search has three steps:
   3. Reranker         - reads the question with each passage and re-sorts them by
                         how well the passage actually answers the question
 Then it keeps only passages that score above a cutoff, up to TOP_N of them.
+
+The documents are split into two collections, each searched on its own:
+  - "official": policies, web pages, the staff FAQ, and other official documents
+  - "meetings": transcripts of recorded meetings
+Meeting transcripts are most of the index (about 9 chunks in 10), so searching
+everything together let meeting talk crowd out the official answer.
 """
 from llama_index.core.node_parser import MarkdownNodeParser, SentenceSplitter
 
@@ -22,6 +28,20 @@ MIN_SCORE = -7.0   # reranker scores below this mean "not related to the questio
                    # Chosen Nov 4, 2026 with check_search.py: passages that answered
                    # test questions scored -5.1 or higher; results for questions the
                    # documents don't cover scored -8.4 or lower.
+MEETING_FILE_PREFIX = "video_"  # youtubeimport.py names meeting transcripts video_<id>_<title>.txt
+
+
+def collection(metadata):
+    """Which collection a chunk belongs to: "meetings" or "official"."""
+    if metadata.get("file_name", "").startswith(MEETING_FILE_PREFIX):
+        return "meetings"
+    return "official"
+
+
+def make_reranker():
+    """Load the reranker model once; both collections share it."""
+    from llama_index.core.postprocessor import SentenceTransformerRerank
+    return SentenceTransformerRerank(model=RERANK_MODEL, top_n=CANDIDATES)
 
 
 def chunkers():
@@ -54,20 +74,33 @@ def combine(meaning_results, keyword_results):
 
 
 class HybridSearch:
-    """Meaning search + keyword search, combined, then re-sorted by a reranker."""
+    """Meaning search + keyword search, combined, then re-sorted by a reranker.
 
-    def __init__(self, index):
-        from llama_index.core.postprocessor import SentenceTransformerRerank
+    which: "official", "meetings", or None (search everything).
+    reranker: pass one from make_reranker() to share it between searches."""
+
+    def __init__(self, index, which=None, reranker=None):
+        from llama_index.core.retrievers import VectorIndexRetriever
         from llama_index.retrievers.bm25 import BM25Retriever
 
-        self.meaning = index.as_retriever(similarity_top_k=CANDIDATES)
-        self.keyword = BM25Retriever.from_defaults(docstore=index.docstore,
+        chunks = list(index.docstore.docs.values())
+        if which:
+            chunks = [c for c in chunks if collection(c.metadata) == which]
+        self.size = len(chunks)   # 0 means this collection is empty
+        if not chunks:
+            return
+        # Both searches look only at this collection's chunks
+        self.meaning = VectorIndexRetriever(index, similarity_top_k=CANDIDATES,
+                                            node_ids=[c.node_id for c in chunks])
+        self.keyword = BM25Retriever.from_defaults(nodes=chunks,
                                                    similarity_top_k=CANDIDATES)
-        self.reranker = SentenceTransformerRerank(model=RERANK_MODEL, top_n=CANDIDATES)
+        self.reranker = reranker or make_reranker()
 
     def rank(self, question):
         """Every candidate passage, best first, with reranker scores.
         Also returns which search found each one (used by check_search.py)."""
+        if not self.size:
+            return [], {}
         merged, found_by = combine(self.meaning.retrieve(question),
                                    self.keyword.retrieve(question))
         ranked = self.reranker.postprocess_nodes(merged[:CANDIDATES], query_str=question)

@@ -17,7 +17,7 @@ from llama_index.core.llms import ChatMessage
 from llama_index.core import Settings, StorageContext, load_index_from_storage
 from llama_index.core.agent.workflow import AgentWorkflow, ToolCallResult
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from search import EMBED_MODEL, HybridSearch   # shared search settings (see search.py)
+from search import EMBED_MODEL, HybridSearch, make_reranker   # shared search settings (see search.py)
 from llama_index.llms.groq import Groq
 from llama_index.llms.openrouter import OpenRouter
 
@@ -114,18 +114,13 @@ def load_agent(index_version):
     if not os.path.exists(os.path.join(PERSIST_DIR, "docstore.json")):
         raise FileNotFoundError("No search index found. Run build_index.py and push the storage folder.")
     index = load_index_from_storage(StorageContext.from_defaults(persist_dir=PERSIST_DIR))
-    searcher = HybridSearch(index)   # meaning + keyword search, then reranker
+    # Two collections, searched separately, so the many meeting transcripts
+    # can't crowd out official documents (see search.py)
+    reranker = make_reranker()
+    official = HybridSearch(index, "official", reranker)
+    meetings = HybridSearch(index, "meetings", reranker)
 
-    async def search_documents(query: str) -> str:
-        """Search the library's and city's documents (policies, services, web
-        pages, the staff FAQ, board information, and city meeting records).
-        Write a short query from the key words in the question, for example
-        "notary" or "printing cost". Keep the name of any department, board,
-        or program the question is about, such as "library board" or "parks
-        commission". Do not add "North Liberty" or other words the person
-        didn't use: every document already mentions North Liberty, and
-        extra words hide the best match. Returns numbered passages, each
-        labeled with its source."""
+    async def run_search(searcher, query):
         # The reranker takes a few seconds; run it off the main loop so other users aren't blocked
         passages = await asyncio.to_thread(searcher.search, query)
         if not passages:
@@ -136,22 +131,56 @@ def load_agent(index_version):
             blocks.append(f"[{i}] Source: {source}\n{n.node.get_content().strip()}")
         return "\n\n---\n\n".join(blocks)
 
+    async def search_documents(query: str) -> str:
+        """Search the library's and city's official documents: policies,
+        services, fees, rules, room reservations, web pages, board and
+        commission information, events, and the staff FAQ. Use this first
+        for almost every question.
+        Write a short query from the key words in the question, for example
+        "notary" or "printing cost". Keep the name of any department, board,
+        or program the question is about, such as "library board" or "parks
+        commission". Do not add "North Liberty" or other words the person
+        didn't use: every document already mentions North Liberty, and
+        extra words hide the best match. Returns numbered passages, each
+        labeled with its source."""
+        return await run_search(official, query)
+
+    async def search_meeting_records(query: str) -> str:
+        """Search transcripts of recorded public meetings (city council,
+        library board, parks and recreation, planning and zoning, and
+        others). Use only for questions about what was discussed, proposed,
+        or decided at a meeting. Meeting talk is not official policy and is
+        not a schedule: never use it for current hours, fees, rules, or
+        upcoming dates.
+        Write a short query from the key words in the question, keeping the
+        name of the board or council it's about. Do not add "North Liberty".
+        Returns numbered passages, each labeled with its source."""
+        return await run_search(meetings, query)
+
+    tools = [search_documents]
+    if meetings.size:   # a library with no meeting transcripts gets one tool
+        tools.append(search_meeting_records)
+
     agent = AgentWorkflow.from_tools_or_functions(
-        [search_documents],
+        tools,
         llm=Settings.llm,
         system_prompt="""You are a friendly policy assistant for North Liberty
         Library, helping staff and the public understand library policies and
         city meeting content.
 
-        Always use the search_documents tool to find relevant information before
-        answering. Base your answers only on what the tool returns — never use
-        outside general knowledge.
+        Always search before answering. Use search_documents for questions
+        about services, policies, rules, fees, events, and schedules. Use
+        search_meeting_records only when the question is about what was said
+        or decided at a meeting; use both if a question needs both. Base your
+        answers only on what the searches return — never use outside general
+        knowledge. Never take a date, time, fee, or rule from a meeting
+        transcript as current: it records what someone said at a past meeting.
 
         Explain things in plain, everyday language. Avoid tables or dense
         formatting unless specifically asked. Lead with the practical bottom
         line, then add detail if needed.
 
-        If the search_documents tool doesn't return relevant information, start your answer with exactly: 
+        If the searches don't return relevant information, start your answer with exactly:
         "I couldn't find anything about [topic] in our documents."  Then suggest asking
         library staff.  Do not say or imply the library
         doesn't offer it, and don't draw conclusions from what a list of
@@ -171,13 +200,13 @@ def load_agent(index_version):
         before today, and give the earliest remaining one. Passages are not in
         date order.
         
-        The search tool returns numbered passages, each with its source. Use only
+        The search tools return numbered passages, each with its source. Use only
         the passages that actually answer the question and ignore the rest. Do not put citation marks in the answer itself: no bracketed numbers
         and no symbols like 【1】. The "Sources:" list at the end is the only
         citation.
         End every answer with "Sources:" followed by the source of each passage
         you used, one per line starting with "- ", copied exactly as given.
-        Never list a source you didn't use or the tool didn't return. If no
+        Never list a source you didn't use or a search didn't return. If no
         passage answers the question, follow the "couldn't find" rule above
         and list no sources.""",
     )
@@ -209,13 +238,18 @@ def ask_agent(question: str):
         # The agent reports each step as an "event"; keep the results of its tool calls
         async for event in handler.stream_events():
             if isinstance(event, ToolCallResult):
-                searches.append({"query": event.tool_kwargs.get("query", str(event.tool_kwargs)),
+                searches.append({"tool": event.tool_name,
+                                 "query": event.tool_kwargs.get("query", str(event.tool_kwargs)),
                                  "results": str(event.tool_output)})
         response = await handler
         return str(response), searches
 
     future = asyncio.run_coroutine_threadsafe(_run(), get_event_loop())
     return future.result(timeout=300)
+
+
+SEARCH_LABELS = {"search_documents": "official documents",
+                 "search_meeting_records": "meeting records"}
 
 
 def show_searches(searches):
@@ -226,7 +260,8 @@ def show_searches(searches):
     label = "search" if len(searches) == 1 else "searches"
     with st.expander(f"How I found this ({len(searches)} {label})"):
         for s in searches:
-            st.markdown(f"**Searched for:** {s['query']}".replace("$", "\\$"))
+            where = SEARCH_LABELS.get(s.get("tool"), "documents")
+            st.markdown(f"**Searched {where} for:** {s['query']}".replace("$", "\\$"))
             st.text(s["results"])
 
 
