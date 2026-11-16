@@ -136,13 +136,17 @@ def load_agent(index_version):
         services, fees, rules, room reservations, web pages, board and
         commission information, events, and the staff FAQ. Use this first
         for almost every question.
-        Write a short query from the key words in the question, for example
-        "notary" or "printing cost". Keep the name of any department, board,
-        or program the question is about, such as "library board" or "parks
-        commission". Do not add "North Liberty" or other words the person
-        didn't use: every document already mentions North Liberty, and
-        extra words hide the best match. Returns numbered passages, each
-        labeled with its source."""
+        Write a short query from the key words in the question. Keep the
+        name of any department, board, or program the question mentions:
+        it tells the search which one. Don't add the town's name or other
+        words the person didn't use: these documents are all about this
+        community, so the town's name doesn't narrow the search, and extra
+        words hide the best match. Examples:
+          "Can I get something notarized?" -> "notary"
+          "How much does printing cost?" -> "printing cost"
+          "When does the library board meet?" -> "library board meeting"
+          "Who is on the parks commission?" -> "parks commission"
+        Returns numbered passages, each labeled with its source."""
         return await run_search(official, query)
 
     async def search_meeting_records(query: str) -> str:
@@ -152,8 +156,11 @@ def load_agent(index_version):
         or decided at a meeting. Meeting talk is not official policy and is
         not a schedule: never use it for current hours, fees, rules, or
         upcoming dates.
-        Write a short query from the key words in the question, keeping the
-        name of the board or council it's about. Do not add "North Liberty".
+               Write a short query from the key words in the question, keeping the
+        name of the board or council it mentions. Don't add the town's name
+        or other words the person didn't use. Examples:
+          "What did the council say about the pool?" -> "city council pool"
+          "Did the library board discuss e-books?" -> "library board e-books"
         Returns numbered passages, each labeled with its source."""
         return await run_search(meetings, query)
 
