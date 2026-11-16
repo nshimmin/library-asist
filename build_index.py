@@ -4,11 +4,14 @@ from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.readers.file import PyMuPDFReader
 from search import EMBED_MODEL, chunkers   # shared settings, so the app always matches
+from sources import label_document       # each chunk's source line: title and department
 
 Settings.embed_model = HuggingFaceEmbedding(model_name=EMBED_MODEL)
 
 documents = SimpleDirectoryReader("data", file_extractor={".pdf": PyMuPDFReader()}).load_data()
 print(f"Loaded {len(documents)} documents")
+for doc in documents:
+    label_document(doc)   # e.g. "title: Room Reservations / department: Library"
 
 index = VectorStoreIndex.from_documents(documents, transformations=chunkers(), show_progress=True)
 index.storage_context.persist(persist_dir="storage")
