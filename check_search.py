@@ -5,6 +5,10 @@ what the AI model gets. No AI model is called, so it costs nothing.
   python check_search.py                    # run the test questions
   python check_search.py "your question"    # test your own question(s)
 
+Searches the official documents, like the app's main search tool. Add:
+  --meetings   to search the meeting transcripts instead
+  --all        to search everything together (the old way, for comparison)
+
 Each line shows:  reranker score, which search found it, file, and a preview.
   M#3 = meaning search ranked it 3rd;  K#1 = keyword search ranked it 1st
   ->  = handed to the AI model (above the cutoff and within the top N)
@@ -29,11 +33,19 @@ QUESTIONS = [
 ]
 SHOW = 10   # how many candidates to print per question
 
-index = load_index_from_storage(StorageContext.from_defaults(persist_dir="storage"))
-searcher = HybridSearch(index)
-print(f"Cutoff: {MIN_SCORE}   Top N: {TOP_N}")
+args = sys.argv[1:]
+which = "official"
+if "--meetings" in args:
+    which = "meetings"
+if "--all" in args:
+    which = None
+questions = [a for a in args if not a.startswith("--")] or QUESTIONS
 
-for q in (sys.argv[1:] or QUESTIONS):
+index = load_index_from_storage(StorageContext.from_defaults(persist_dir="storage"))
+searcher = HybridSearch(index, which)
+print(f"Searching: {which or 'everything'} ({searcher.size} chunks)   Cutoff: {MIN_SCORE}   Top N: {TOP_N}")
+
+for q in questions:
     print(f"\n=== {q}")
     start = time.time()
     ranked, found_by = searcher.rank(q)
