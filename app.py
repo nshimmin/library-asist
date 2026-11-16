@@ -212,9 +212,7 @@ def load_agent(index_version):
     )
     return agent, model_label
 
-
-# Reload automatically whenever a new index is pushed: the index file's
-# "last modified" time changes, so the saved copy no longer matches.
+# Reload agent if new index version, keeping only the newest version on memory
 index_version = os.path.getmtime(os.path.join(PERSIST_DIR, "docstore.json"))
 agent, model_label = load_agent(index_version)
 
