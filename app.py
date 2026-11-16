@@ -103,8 +103,8 @@ def friendly_source(metadata: dict) -> str:
         return f"{name.removesuffix('.pdf')}, page {page}" if page else name
     return name.rsplit(".", 1)[0]
     
-@st.cache_resource
-def load_agent():
+@st.cache_resource(max_entries=1)
+def load_agent(index_version):
     """Build (or load) the index and agent once, then reuse across all user interactions."""
     Settings.embed_model = HuggingFaceEmbedding(model_name=EMBED_MODEL)
 
@@ -213,7 +213,10 @@ def load_agent():
     return agent, model_label
 
 
-agent, model_label = load_agent()
+# Reload automatically whenever a new index is pushed: the index file's
+# "last modified" time changes, so the saved copy no longer matches.
+index_version = os.path.getmtime(os.path.join(PERSIST_DIR, "docstore.json"))
+agent, model_label = load_agent(index_version)
 
 @st.cache_resource
 def get_event_loop():
