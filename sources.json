@@ -41,6 +41,15 @@
   },
   "Library Services FAQ.txt": {
     "title": "Library Services FAQ (staff-maintained)",
-    "url": "https://github.com/nshimmin/library-asist/blob/main/data/Library%20Services%20FAQ.txt"
+    "url": "https://github.com/nshimmin/library-asist/blob/main/data/Library%20Services%20FAQ.txt",
+    "department": "Library"
+  },
+  "NLL-Policy-Manual-NOV2026.pdf": {
+    "title": "Library Policy Manual (November 2026)",
+    "department": "Library"
+  },
+  "Opening and Closing Procedures - updated 7.2026.pdf": {
+    "title": "Library Opening and Closing Procedures (July 2026)",
+    "department": "Library"
   }
 }

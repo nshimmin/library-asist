@@ -18,6 +18,7 @@ from llama_index.core import Settings, StorageContext, load_index_from_storage
 from llama_index.core.agent.workflow import AgentWorkflow, ToolCallResult
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from search import EMBED_MODEL, HybridSearch, make_reranker   # shared search settings (see search.py)
+from sources import friendly_source   # readable source labels (see sources.py)
 from llama_index.llms.groq import Groq
 from llama_index.llms.openrouter import OpenRouter
 
@@ -80,29 +81,6 @@ def pick_llm():
         context_window=8000,
     )
 
-# Titles and web addresses recorded by the import scripts - see webimport.py
-try: 
-    with open("sources.json", encoding="utf-8") as f:
-        SOURCE_INFO = json.load(f)
-except (FileNotFoundError, json.JSONDecodeError):
-    SOURCE_INFO = {} # no catalog, so fall back to file names. 
-
-#code to make references easier to read from file names
-def friendly_source(metadata: dict) -> str:
-    """Turn a chunk's file info into a readable source label."""
-    name = metadata.get("file_name", "Unknown document")
-    info = SOURCE_INFO.get(name)
-    if info: 
-        return f"{info['title']} ({info['url']})"
-    if name.startswith("video_"):
-        video_id = name[6:17]  # YouTube IDs are always 11 characters
-        title = name[18:].removesuffix(".txt")
-        return f"{title} (video: https://youtu.be/{video_id})"
-    if name.endswith(".pdf"):
-        page = metadata.get("source")  # the PDF reader stores the page number here
-        return f"{name.removesuffix('.pdf')}, page {page}" if page else name
-    return name.rsplit(".", 1)[0]
-    
 @st.cache_resource(max_entries=1)
 def load_agent(index_version):
     """Build (or load) the index and agent once, then reuse across all user interactions."""
