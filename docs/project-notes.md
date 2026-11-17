@@ -4,7 +4,8 @@ Running notes for the North Liberty library/city RAG assistant (GitHub: `nshimmi
 
 **Working principles:**
 - Avoid temporary fixes. Wait until a good, lasting fix is possible.
-- End goal: package this so other communities and libraries can implement it as easily as possible. Keep the **Implementation Guide** (project doc) current with how-tos and everything included.
+- End goal: package this so other communities and libraries can implement it as easily as possible. Keep the **Implementation Guide** (`docs/implementation-guide.md`) current with how-tos and everything included.
+- **These docs live in the repo's `docs/` folder** (moved from the claude.ai Project on Nov 17, 2026). Edit them here; the Project keeps only pointers.
 
 ## Roadmap
 
@@ -149,7 +150,7 @@ These are parked until an official, lasting source is available. No temporary wo
 | Chat model | `openai/gpt-oss-120b` via Groq (free tier) | Open-weight (Apache 2.0). Meets proposal Q20. |
 | Embeddings (search) | `BAAI/bge-small-en-v1.5` | Open (MIT) |
 | Keyword search | BM25 (`llama-index-retrievers-bm25`, bm25s, PyStemmer) | Open source |
-| Collections | Official documents (123 chunks) and meeting transcripts (1,128) searched by separate tools | (design) |
+| Collections | Official documents (123 chunks) and meeting transcripts (1,078) searched by separate tools; each chunk carries a source line (title and department) | (design) |
 | Reranker | `cross-encoder/ms-marco-MiniLM-L-6-v2` | Open (Apache 2.0) |
 | Framework | LlamaIndex | Open source (MIT) |
 | Web import | trafilatura (main content) + html2text (listing pages) | Open source (Apache 2.0 / GPL 3.0) |
@@ -161,7 +162,7 @@ Ready but switched off: **OLMo 3.1 32B Instruct** (Ai2, fully open: weights, tra
 
 ## How the pieces fit
 
-- **Source references.** Each answer ends with a "Sources:" list. `friendly_source()` in `app.py` turns file names into readable labels:
+- **Source references.** Each answer ends with a "Sources:" list. `friendly_source()` in `sources.py` turns file names into readable labels:
   - Files listed in `sources.json` show their title and web address.
   - Meeting videos show the meeting name and a YouTube link.
   - PDFs show the document name and page number.
@@ -169,6 +170,7 @@ Ready but switched off: **OLMo 3.1 32B Instruct** (Ai2, fully open: weights, tra
 - **`sources.json`** is the "card catalog" of titles and web addresses. `webimport.py` updates it automatically each time it runs, keeping entries added by hand (like the FAQ). It sits outside `data/` so it isn't indexed as a document. The app falls back to plain file names if the file is missing or has a JSON error.
 - **Web import.** `webimport.py` downloads each page in its URL list. Normal pages: trafilatura keeps the main content and drops menus and footers. Pages on `WHOLE_PAGE_URLS` (listing pages like the calendar): saved whole with html2text. Saves `data/web_N.txt` (numbered by list position, so add new URLs at the end) and records title and address in `sources.json`. If a page can't be downloaded or has no content, it keeps the old copy and says so.
 - **Chunking.** `build_index.py` cuts at headings first, then splits long sections to ~512 tokens. Settings live in `search.py`, shared with the app.
+- **Source line (`sources.py`).** Before chunking, each document is stamped with a title and department; after chunking, a section whose heading names a board gets that board as its department. Only these two fields are added to the searched text (no file paths, dates, or page numbers).
 - **Search (`search.py`).** Meaning search and keyword search each find 20 candidates; the lists are merged (Reciprocal Rank Fusion); the reranker scores them; passages scoring at least −7.0 go to the model, up to 5.
 - **Today's date.** `ask_agent` sends a separate system note ("Today is …", Central time) with every question. It isn't in the main prompt because the prompt is built once at startup.
 - **Dollar signs.** Answers are escaped (`$` → `\$`) before display, because Streamlit treats text between two `$` signs as math.
@@ -294,4 +296,4 @@ Skip the optional moderation step, which uses Google Cloud.
 - **Nov 17, 2026:** Merged interface styling (PR #6: theme file with light and dark colors at WCAG AA contrast, welcome screen, example questions; requires Streamlit 1.67+).
 - **Nov 17, 2026:** Rebuilt with the source line. Not-found questions score about −11 (cutoff −7); notary 8.63 with the next passage at −10.13. Side effect found: policy manual chunks labeled "Library" twice outranked the trustees section (labeled "City of North Liberty"), which fell to #5 for "library board meeting." Fixed with section-level departments (PR #7): a section whose heading names a board gets that board as its department. Trustees section back to #2; "parks commission" #1 at 7.03.
 - **Nov 17, 2026:** Planned the document "front door": folders as collections and incremental builds, one import script with an inbox, automatic builds with GitHub Actions (warnings and a build report, no automatic moving), then converters and the settings file. Nick: the import script should handle placement for the librarian.
-- **Nov 17, 2026:** Building and testing moves to Claude Code in the Codespace; planning stays in the claude.ai Project. Project docs copied into the repo's `docs/` folder.
+- **Nov 17, 2026:** Building and testing moves to Claude Code in the Codespace; planning stays in the claude.ai Project. Project docs moved into the repo's `docs/` folder (PR #8), which is now their only home; the Project keeps pointers. Added `CLAUDE.md` to orient Claude Code.
