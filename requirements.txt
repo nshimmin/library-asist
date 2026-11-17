@@ -1,4 +1,4 @@
-streamlit
+streamlit>=1.67
 llama-index
 llama-index-llms-groq
 llama-index-embeddings-huggingface
