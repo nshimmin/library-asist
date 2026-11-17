@@ -6,7 +6,8 @@ what the AI model gets. No AI model is called, so it costs nothing.
   python check_search.py "your question"    # test your own question(s)
 
 Searches the official documents, like the app's main search tool. Add:
-  --meetings   to search the meeting transcripts instead
+  --meetings   to search the meeting transcripts instead (any collection works:
+               --<folder name in data/>)
   --all        to search everything together (the old way, for comparison)
 
 Each line shows:  reranker score, which search found it, file, and a preview.
@@ -17,7 +18,7 @@ import sys
 import time
 from llama_index.core import StorageContext, load_index_from_storage, Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from search import EMBED_MODEL, MIN_SCORE, TOP_N, HybridSearch
+from search import EMBED_MODEL, MIN_SCORE, TOP_N, HybridSearch, collection
 
 Settings.embed_model = HuggingFaceEmbedding(model_name=EMBED_MODEL)
 
@@ -34,15 +35,17 @@ QUESTIONS = [
 SHOW = 10   # how many candidates to print per question
 
 args = sys.argv[1:]
-which = "official"
-if "--meetings" in args:
-    which = "meetings"
-if "--all" in args:
+flags = [a[2:] for a in args if a.startswith("--")]
+which = flags[0] if flags else "official"   # a collection's folder name
+if "all" in flags:
     which = None
 questions = [a for a in args if not a.startswith("--")] or QUESTIONS
 
 index = load_index_from_storage(StorageContext.from_defaults(persist_dir="storage"))
 searcher = HybridSearch(index, which)
+if not searcher.size and which:
+    names = sorted({collection(c.metadata) for c in index.docstore.docs.values()})
+    sys.exit(f'No collection named "{which}". Collections: {", ".join(names)}')
 print(f"Searching: {which or 'everything'} ({searcher.size} chunks)   Cutoff: {MIN_SCORE}   Top N: {TOP_N}")
 
 for q in questions:

@@ -20,7 +20,7 @@ WHOLE_PAGE_URLS = {
     "https://northliberty-ia.whofi.com/",
 }
 
-Path("data").mkdir(exist_ok=True)
+Path("data/official").mkdir(parents=True, exist_ok=True)   # web pages are official documents
 
 # The "card catalog": file name -> title and web address.
 # Load the existing one (if any) so other import scripts can add to it too.
@@ -45,7 +45,7 @@ for i, url in enumerate(urls):
         print(f"No main content found on {url} - keeping the old copy of {filename}")
         continue
     
-    (Path("data") / filename).write_text(text, encoding="utf-8")
+    (Path("data/official") / filename).write_text(text, encoding="utf-8")
     
     meta = trafilatura.extract_metadata(html)
     title = meta.title if meta and meta.title else url

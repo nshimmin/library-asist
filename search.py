@@ -11,11 +11,14 @@ The search has three steps:
                         how well the passage actually answers the question
 Then it keeps only passages that score above a cutoff, up to TOP_N of them.
 
-The documents are split into two collections, each searched on its own:
-  - "official": policies, web pages, the staff FAQ, and other official documents
-  - "meetings": transcripts of recorded meetings
+The documents are split into collections, each searched on its own. Each
+folder in data/ is one collection:
+  - data/official/: policies, web pages, the staff FAQ, and other official documents
+  - data/meetings/: transcripts of recorded meetings
 Meeting transcripts are most of the index (about 9 chunks in 10), so searching
 everything together let meeting talk crowd out the official answer.
+To move a document to another collection, move its file to that folder and
+run build_index.py.
 """
 from llama_index.core.node_parser import MarkdownNodeParser, SentenceSplitter
 
@@ -28,14 +31,15 @@ MIN_SCORE = -7.0   # reranker scores below this mean "not related to the questio
                    # Chosen Nov 4, 2026 with check_search.py: passages that answered
                    # test questions scored -5.1 or higher; results for questions the
                    # documents don't cover scored -8.4 or lower.
-MEETING_FILE_PREFIX = "video_"  # youtubeimport.py names meeting transcripts video_<id>_<title>.txt
+CHUNK_SIZE = 512      # longest chunk, in tokens (long sections are split to this size)
+CHUNK_OVERLAP = 50    # tokens repeated between neighboring pieces of a split section
+DEFAULT_COLLECTION = "official"   # files sitting directly in data/, outside any folder
 
 
 def collection(metadata):
-    """Which collection a chunk belongs to: "meetings" or "official"."""
-    if metadata.get("file_name", "").startswith(MEETING_FILE_PREFIX):
-        return "meetings"
-    return "official"
+    """Which collection a chunk belongs to: the name of its folder in data/.
+    build_index.py stores it with every chunk."""
+    return metadata.get("collection", DEFAULT_COLLECTION)
 
 
 def make_reranker():
@@ -48,7 +52,7 @@ def chunkers():
     """How documents are cut into chunks: at headings first, then by size."""
     return [
         MarkdownNodeParser(),                                # 1. cut at headings
-        SentenceSplitter(chunk_size=512, chunk_overlap=50),  # 2. cap the size
+        SentenceSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP),  # 2. cap the size
     ]
 
 

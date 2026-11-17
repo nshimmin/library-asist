@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound
 
-Path("data").mkdir(exist_ok=True)
+Path("data/meetings").mkdir(parents=True, exist_ok=True)   # transcripts are the meetings collection
 
 successful = 0
 failed = []
@@ -20,7 +20,7 @@ for video in filtered_videos:
 
         # Sanitize title for use as a filename
         safe_title = "".join(c if c.isalnum() or c in " -_" else "" for c in title)[:80]
-        filepath = Path("data") / f"video_{video_id}_{safe_title}.txt"
+        filepath = Path("data/meetings") / f"video_{video_id}_{safe_title}.txt"
 
         filepath.write_text(
             f"Title: {title}\nPublished: {video['published'].date()}\nVideo ID: {video_id}\n\n{full_text}",

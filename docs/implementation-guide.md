@@ -75,12 +75,12 @@ The embedding model and reranker download once from Hugging Face and run inside 
 | `docs/` | This guide, the project notes, and the test questions |
 | `search.py` | **All search settings in one place:** models, chunking, how many passages, the not-found cutoff. Shared by the app and the scripts so they always match. |
 | `requirements.txt` | Packages the app needs |
-| `data/` | Your documents (PDFs, text files, saved web pages, staff FAQ) |
-| `storage/` | The search index built from `data/` (commit it; don't let the app rebuild it) |
+| `data/` | Your documents. **Each folder is one collection** with its own search tool: `data/official/` (policies, web pages, staff FAQ) and `data/meetings/` (meeting transcripts). |
+| `storage/` | The search index built from `data/` (commit it; don't let the app rebuild it). `storage/build_manifest.json` records each document's fingerprint, collection, and chunk count. |
 | `sources.json` | "Card catalog": a readable title and web link for each document |
-| `build_index.py` | Rebuilds `storage/` from `data/` |
-| `webimport.py` | Downloads web pages into `data/` and updates `sources.json` |
-| `youtubeimport.py` | Downloads meeting-video transcripts into `data/` |
+| `build_index.py` | Updates `storage/` from `data/`, processing only new, changed, or removed documents (`--full` rebuilds everything) |
+| `webimport.py` | Downloads web pages into `data/official/` and updates `sources.json` |
+| `youtubeimport.py` | Downloads meeting-video transcripts into `data/meetings/` |
 | `pdfimport.py` | PDF import helper |
 | `check_search.py` | Shows what the search finds for a question, step by step, with scores (no AI cost) |
 
@@ -89,7 +89,7 @@ The embedding model and reranker download once from Hugging Face and run inside 
 ## 3. Setup, step by step
 
 1. **Copy the repository** to your own GitHub account.
-2. **Replace the documents** in `data/` with your own (see section 4), and edit the URL list in `webimport.py`.
+2. **Replace the documents** in `data/official/` and `data/meetings/` with your own (see section 4), and edit the URL list in `webimport.py`.
 3. **Edit the library name** in `app.py` (the system prompt and title). *A settings file to make this easier is planned.*
 4. **Build the index** in Codespaces (see section 5), then commit `data/`, `sources.json`, and `storage/`.
 5. **Get a Groq API key** at console.groq.com.
@@ -153,24 +153,29 @@ Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly fr
 
 **Adding or updating documents:**
 1. `git pull`
-2. Put files in `data/`, or run an import script (`python webimport.py`).
-3. `python build_index.py` (slow: most of the time goes to meeting transcripts).
+2. Put files in the right collection folder (`data/official/` or `data/meetings/`), or run an import script (`python webimport.py`).
+3. `python build_index.py`. It only processes documents that are new, changed, moved, or removed, and lists them. The first build (or `python build_index.py --full`) does everything and is slow; after that a small edit takes seconds.
 4. `python check_search.py "a question about the new content"` to confirm it's found.
 5. Commit and push `data`, `sources.json`, and `storage`.
-6. **Reboot the app** in Streamlit (share.streamlit.io → the app's ⋮ menu → Reboot app). The app keeps the index in memory and doesn't notice an index-only push. *An automatic reload is planned.* Telltale sign you forgot: "How I found this" cites a file you deleted.
+6. The app notices the new index and reloads it on its own.
 
 **What needs a rebuild:**
 
 | What you changed | Rebuild? |
 |---|---|
 | `app.py` (prompt, tool description) | No. The app restarts on its own after a push. |
-| Anything in `data/` (FAQ, policy manual, web pages) | Yes: `build_index.py`, push, then reboot the app. |
+| Anything in `data/` (FAQ, policy manual, web pages), or a title or department in `sources.json` | Yes: `build_index.py` (only the affected documents), then push. |
+| Embedding model or chunk sizes (`search.py`), department rules (`sources.py`) | Yes. `build_index.py` rebuilds everything on its own, since every chunk changes. |
 
 **Adding a web page:**
 1. Add its URL to the `urls` list in `webimport.py`. **Keep the order the same** (files are numbered by position); add new pages at the end.
-2. Run `python webimport.py` and skim the saved file in `data/`.
+2. Run `python webimport.py` and skim the saved file in `data/official/`.
 3. Most pages: done. trafilatura keeps the main content and drops menus and footers.
 4. **Listing pages** (event calendars, staff directories, lists of databases) are different: their links *are* the content, and trafilatura drops link text. If the saved file is missing titles or names, add the URL to `WHOLE_PAGE_URLS` in `webimport.py` and re-run. That page is then saved whole.
+
+**Collections:** each folder in `data/` is one collection, searched by its own tool, so the many meeting transcripts can't crowd out official answers. To move a document to another collection, move its file to that folder and run `build_index.py`. Files left directly in `data/` are treated as official.
+
+**How the build knows what changed:** `build_index.py` keeps a fingerprint (a SHA-256 code) of each file in `storage/build_manifest.json`, along with its collection, title, and department. If any of those differ next time, that document's old chunks are removed and it's processed again. Windows and Linux line endings are treated the same, so building on another computer doesn't reprocess everything.
 
 **How documents are chunked:** `build_index.py` first cuts documents at their headings (`#`, `##`…), then splits any section that's still long into ~512-token pieces. Pages with headings (web pages, a heading-style FAQ) get one chunk per section; documents without headings (transcripts, PDFs) are split by size only.
 

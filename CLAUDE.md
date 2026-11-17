@@ -40,7 +40,7 @@ Changes to `data/`, `sources.py`, `sources.json`, or `build_index.py` need `pyth
 | `search.py` | All search settings: models, chunking, collections, hybrid search, reranker cutoff |
 | `sources.py` | Titles, links, and departments (the source line on every chunk) |
 | `sources.json` | The catalog: title, web address, department per file |
-| `build_index.py` | Rebuilds `storage/` from `data/` |
+| `build_index.py` | Updates `storage/` from `data/`: only new, changed, or removed documents (`--full` for everything) |
 | `check_search.py` | Search diagnostics |
 | `webimport.py`, `youtubeimport.py`, `pdfimport.py` | Import scripts (to be replaced by one import script; see "Next up") |
-| `data/` | Documents. `storage/` is the built index (commit it). |
+| `data/` | Documents. Each folder is a collection (`official/`, `meetings/`). `storage/` is the built index (commit it), with `build_manifest.json` (each document's fingerprint and chunk count). |
