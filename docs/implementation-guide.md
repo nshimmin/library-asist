@@ -157,14 +157,14 @@ Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly fr
 3. `python build_index.py` (slow: most of the time goes to meeting transcripts).
 4. `python check_search.py "a question about the new content"` to confirm it's found.
 5. Commit and push `data`, `sources.json`, and `storage`.
-6. **Reboot the app** in Streamlit (share.streamlit.io → the app's ⋮ menu → Reboot app). The app keeps the index in memory and doesn't notice an index-only push. *An automatic reload is planned.* Telltale sign you forgot: "How I found this" cites a file you deleted.
+6. The app notices the new index on its own and reloads it within a few minutes (the first question afterwards takes a few extra seconds). If "How I found this" still cites a file you deleted, reboot the app in Streamlit (share.streamlit.io → the app's ⋮ menu → Reboot app).
 
 **What needs a rebuild:**
 
 | What you changed | Rebuild? |
 |---|---|
 | `app.py` (prompt, tool description) | No. The app restarts on its own after a push. |
-| Anything in `data/` (FAQ, policy manual, web pages) | Yes: `build_index.py`, push, then reboot the app. |
+| Anything in `data/` (FAQ, policy manual, web pages), `sources.py`, `sources.json`, or `build_index.py` | Yes: `build_index.py`, then push `storage/`. The app reloads it on its own. |
 
 **Adding a web page:**
 1. Add its URL to the `urls` list in `webimport.py`. **Keep the order the same** (files are numbered by position); add new pages at the end.
