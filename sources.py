@@ -38,6 +38,7 @@ DEPARTMENT_BY_TITLE = [
     (r"board of adjustment", "Board of Adjustment"),
     (r"\btree\b", "Tree and Storm Water Advisory Board"),
     (r"police", "Police Department"),
+    (r"cemetery", "Cemetery Board"),
 ]
 DEFAULT_DEPARTMENT = "City of North Liberty"
 
@@ -53,6 +54,15 @@ def source_title(metadata):
     return name.rsplit(".", 1)[0]
 
 
+def department_in(text):
+    """The department named in a title or heading, using the rules above, or None."""
+    text = text.lower()
+    for pattern, dept in DEPARTMENT_BY_TITLE:
+        if re.search(pattern, text):
+            return dept
+    return None
+
+
 def department(metadata):
     """Which department or board a document belongs to."""
     info = SOURCE_INFO.get(metadata.get("file_name", ""), {})
@@ -62,11 +72,7 @@ def department(metadata):
     for site, dept in DEPARTMENT_BY_WEBSITE:
         if site in url:
             return dept
-    title = source_title(metadata).lower()
-    for pattern, dept in DEPARTMENT_BY_TITLE:
-        if re.search(pattern, title):
-            return dept
-    return DEFAULT_DEPARTMENT
+    return department_in(source_title(metadata)) or DEFAULT_DEPARTMENT
 
 
 def friendly_source(metadata):
@@ -97,3 +103,17 @@ def label_document(doc):
     hidden.append("header_path")   # added later, when chunks are cut at headings
     doc.excluded_embed_metadata_keys = hidden
     doc.excluded_llm_metadata_keys = list(doc.metadata) + ["header_path"]   # the app adds its own labels
+
+
+def label_chunk(chunk):
+    """Refine a chunk's department from its own heading, after chunking.
+
+    Some pages cover several departments: the city's Boards & Commissions page
+    has a section for each board. If a chunk starts with a heading that names
+    one ("## Library Board of Trustees"), that section gets that department
+    instead of the page's ("City of North Liberty")."""
+    first_line = chunk.get_content().lstrip().split("\n", 1)[0]
+    if first_line.startswith("#"):
+        dept = department_in(first_line.lstrip("#"))
+        if dept:
+            chunk.metadata["department"] = dept
