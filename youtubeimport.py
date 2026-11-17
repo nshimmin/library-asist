@@ -62,8 +62,8 @@ print(f"\nTotal videos to process: {len(filtered_videos)}")
 import json
 print(json.dumps(filtered_videos, default=str))
 
-# --- Step 4: Fetch transcripts and save them into data/ ---
-Path("data").mkdir(exist_ok=True)
+# --- Step 4: Fetch transcripts and save them into data/meetings/ ---
+Path("data/meetings").mkdir(parents=True, exist_ok=True)   # transcripts are the meetings collection
 
 successful = 0
 failed = []
@@ -78,7 +78,7 @@ for video in filtered_videos[:3]:  # start small, remove [:3] once confirmed wor
         full_text = " ".join(segment.text for segment in transcript_list)
 
         safe_title = "".join(c if c.isalnum() or c in " -_" else "" for c in title)[:80]
-        filepath = Path("data") / f"video_{video_id}_{safe_title}.txt"
+        filepath = Path("data/meetings") / f"video_{video_id}_{safe_title}.txt"
 
         filepath.write_text(
             f"Title: {title}\nPublished: {video['published'].date()}\nVideo ID: {video_id}\n\n{full_text}",

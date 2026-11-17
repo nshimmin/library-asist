@@ -1,0 +1,769 @@
+{
+ "settings": "711ff1e7e92cbfd3037f64f590ca3f97a889f322c2dbab27789a9e6626c29544",
+ "documents": {
+  "meetings/video_-aXmCQrk4EY_Public Improvements 2026 Ranshaw Way.txt": {
+   "fingerprint": "bf84c9aabfef95dbe81ff75ed5b0dd4682015e4caff530142d8c1aff0b850fb8",
+   "collection": "meetings",
+   "title": "Public Improvements 2026 Ranshaw Way",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_-aXmCQrk4EY_Public Improvements 2026 Ranshaw Way.txt#0"
+   ],
+   "chunks": 7
+  },
+  "meetings/video_0zUhEzGNYZk_North Liberty Parks  Recreation Commission on June 4  2026.txt": {
+   "fingerprint": "043044e938159b0bc5f51e9db4aa0a7aff1605d3da7d5b890347bd17a5fe23ab",
+   "collection": "meetings",
+   "title": "North Liberty Parks Recreation Commission on June 4 2026",
+   "department": "Parks and Recreation Commission",
+   "doc_ids": [
+    "meetings/video_0zUhEzGNYZk_North Liberty Parks  Recreation Commission on June 4  2026.txt#0"
+   ],
+   "chunks": 22
+  },
+  "meetings/video_1qnAnqQ_QDg_Public Meetings.txt": {
+   "fingerprint": "c23cac46c47c9abf666c134b84d1ec882bf2a03bee97913fdf8b5f90cfc1ae11",
+   "collection": "meetings",
+   "title": "Public Meetings",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_1qnAnqQ_QDg_Public Meetings.txt#0"
+   ],
+   "chunks": 16
+  },
+  "meetings/video_2_4UcZa_RSs_Board of Adjustment meeting May 13 2026.txt": {
+   "fingerprint": "7f78f897217bded1bc71b877a3ef060f37503a62361ccce2e81e8b67f440c15b",
+   "collection": "meetings",
+   "title": "Board of Adjustment meeting May 13 2026",
+   "department": "Board of Adjustment",
+   "doc_ids": [
+    "meetings/video_2_4UcZa_RSs_Board of Adjustment meeting May 13 2026.txt#0"
+   ],
+   "chunks": 10
+  },
+  "meetings/video_2Hi6hJoaFjU_North Liberty City Council Special Session on January 20 2026.txt": {
+   "fingerprint": "d78fcdc58f509476dac8cffeb2e2d54a5f4ed2d1852a94696d93675866532c1f",
+   "collection": "meetings",
+   "title": "North Liberty City Council Special Session on January 20 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_2Hi6hJoaFjU_North Liberty City Council Special Session on January 20 2026.txt#0"
+   ],
+   "chunks": 48
+  },
+  "meetings/video_2RwI9LKfjXI_North Liberty City Council Meeting on August 11 2026.txt": {
+   "fingerprint": "e8a0fdb086a185c7e931c2521de779f9af7bb8baf96a82cfe673917c9d3d2dc3",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on August 11 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_2RwI9LKfjXI_North Liberty City Council Meeting on August 11 2026.txt#0"
+   ],
+   "chunks": 15
+  },
+  "meetings/video_2tdTAcQl1fM_Public Improvements 2026 Cherry Street Fire House.txt": {
+   "fingerprint": "e84dd1058f21b0a73dbf5feb64861bb4d7020c331719dc9d006c83f5dfbfeffd",
+   "collection": "meetings",
+   "title": "Public Improvements 2026 Cherry Street Fire House",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_2tdTAcQl1fM_Public Improvements 2026 Cherry Street Fire House.txt#0"
+   ],
+   "chunks": 20
+  },
+  "meetings/video_3VPP6VwyBEw_North Liberty Tree and Storm Water meeting on August 12 2026.txt": {
+   "fingerprint": "7f1b0f43558eca2acbd5fa1725b488cdcf96973ce7dbdacdf7d45a30fb42be6b",
+   "collection": "meetings",
+   "title": "North Liberty Tree and Storm Water meeting on August 12 2026",
+   "department": "Tree and Storm Water Advisory Board",
+   "doc_ids": [
+    "meetings/video_3VPP6VwyBEw_North Liberty Tree and Storm Water meeting on August 12 2026.txt#0"
+   ],
+   "chunks": 14
+  },
+  "meetings/video_41oO-Yu653w_Join the North Liberty Police Department.txt": {
+   "fingerprint": "f582cfb9ff9c239a0e5ba116ad03bb0fc52580c330e853eadefd6e46aa1a2409",
+   "collection": "meetings",
+   "title": "Join the North Liberty Police Department",
+   "department": "Police Department",
+   "doc_ids": [
+    "meetings/video_41oO-Yu653w_Join the North Liberty Police Department.txt#0"
+   ],
+   "chunks": 2
+  },
+  "meetings/video_4afbH5fHDWA_Hometown Pride and Water.txt": {
+   "fingerprint": "32746c94eed888e3c5fd4b4de2f0f2927d965db38c05edfe2ba27f09c05aefb4",
+   "collection": "meetings",
+   "title": "Hometown Pride and Water",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_4afbH5fHDWA_Hometown Pride and Water.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_4AJ5kYcsDyQ_Eye on North Liberty Community Center Parking Lot Construction.txt": {
+   "fingerprint": "958f52b7d2023bbd82d1d402d1bf8fad7904224a76606c50f4b3e85844cef902",
+   "collection": "meetings",
+   "title": "Eye on North Liberty Community Center Parking Lot Construction",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_4AJ5kYcsDyQ_Eye on North Liberty Community Center Parking Lot Construction.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_4ts13KaJwgE_North Liberty City Council meeting March 24 2026 Special and Regular Session.txt": {
+   "fingerprint": "929913f2ffd55a9589f6a00f5507e537e19df56e47af833134593d9639358608",
+   "collection": "meetings",
+   "title": "North Liberty City Council meeting March 24 2026 Special and Regular Session",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_4ts13KaJwgE_North Liberty City Council meeting March 24 2026 Special and Regular Session.txt#0"
+   ],
+   "chunks": 35
+  },
+  "meetings/video_6caQwyAXjk4_Tree  Storm water Advisory Board on January 14 2026.txt": {
+   "fingerprint": "45124df6c8163687ba0ccd0094ab323a4cbe7f694a96e57e1cfd9bf1f21ef0f3",
+   "collection": "meetings",
+   "title": "Tree Storm water Advisory Board on January 14 2026",
+   "department": "Tree and Storm Water Advisory Board",
+   "doc_ids": [
+    "meetings/video_6caQwyAXjk4_Tree  Storm water Advisory Board on January 14 2026.txt#0"
+   ],
+   "chunks": 6
+  },
+  "meetings/video_8bj6WWUdCR8_MPOJC Meeting January 12 2026.txt": {
+   "fingerprint": "694269c43dc36aef472b5c3a094bb0e5befbae111b441ad58323dbe853fc7498",
+   "collection": "meetings",
+   "title": "MPOJC Meeting January 12 2026",
+   "department": "Metropolitan Planning Organization of Johnson County",
+   "doc_ids": [
+    "meetings/video_8bj6WWUdCR8_MPOJC Meeting January 12 2026.txt#0"
+   ],
+   "chunks": 31
+  },
+  "meetings/video_9OpytvjmjzY_Planning and Zoning meeting for June 2 2026.txt": {
+   "fingerprint": "b6e2a181785a5801cbaed65dec76697dde2a18940ef2b73dfee6b430c01763aa",
+   "collection": "meetings",
+   "title": "Planning and Zoning meeting for June 2 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video_9OpytvjmjzY_Planning and Zoning meeting for June 2 2026.txt#0"
+   ],
+   "chunks": 13
+  },
+  "meetings/video_9TK3u_gE_ts_North Liberty City Council Meeting on May 12 2026.txt": {
+   "fingerprint": "7ad8baa5509d86580a05b0c33cd20677f64470b7509757e9a2d52180bf1795f6",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on May 12 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_9TK3u_gE_ts_North Liberty City Council Meeting on May 12 2026.txt#0"
+   ],
+   "chunks": 24
+  },
+  "meetings/video__V8ilAegxdI_Tree and Storm Water Advisory Board meeting May 13 2026.txt": {
+   "fingerprint": "9cedc1c0898a5ab03715191f540375d33ad5f5cf93a9155b4cd1e61028447d1b",
+   "collection": "meetings",
+   "title": "Tree and Storm Water Advisory Board meeting May 13 2026",
+   "department": "Tree and Storm Water Advisory Board",
+   "doc_ids": [
+    "meetings/video__V8ilAegxdI_Tree and Storm Water Advisory Board meeting May 13 2026.txt#0"
+   ],
+   "chunks": 9
+  },
+  "meetings/video__VVCSXgzy-o_North Liberty Planning  Zoning Commission on January 6 2026.txt": {
+   "fingerprint": "773c07cd06da0e57d85715f3b6f94c795389607bbe233489a4b0985c7416e09b",
+   "collection": "meetings",
+   "title": "North Liberty Planning Zoning Commission on January 6 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video__VVCSXgzy-o_North Liberty Planning  Zoning Commission on January 6 2026.txt#0"
+   ],
+   "chunks": 26
+  },
+  "meetings/video_aESEe5J5Vog_North Liberty City Council Meeting on February 10 2026.txt": {
+   "fingerprint": "9c946420c8552899eabd51217f9fb1f7f7f01739de3a715ceba8f4c6d29969e1",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on February 10 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_aESEe5J5Vog_North Liberty City Council Meeting on February 10 2026.txt#0"
+   ],
+   "chunks": 12
+  },
+  "meetings/video_AI_4mJeSEc8_North Liberty City Council meeting on September 8 2026.txt": {
+   "fingerprint": "04ce5e4998906bdb7b9efeee996f3debb09cf8c0a61bea7d84f23faa8a1fcb2d",
+   "collection": "meetings",
+   "title": "North Liberty City Council meeting on September 8 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_AI_4mJeSEc8_North Liberty City Council meeting on September 8 2026.txt#0"
+   ],
+   "chunks": 17
+  },
+  "meetings/video_CUWMdveJGfo_North Liberty Planning and Zoning meeting on August 4 2026.txt": {
+   "fingerprint": "5742ecab291ef43d94b088b3fffcc8aee2d50a453168e2fc65409e1fa56527c8",
+   "collection": "meetings",
+   "title": "North Liberty Planning and Zoning meeting on August 4 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video_CUWMdveJGfo_North Liberty Planning and Zoning meeting on August 4 2026.txt#0"
+   ],
+   "chunks": 13
+  },
+  "meetings/video_d-ZdWWYhr8c_Eye on North Liberty Muddy Creek Enhancements.txt": {
+   "fingerprint": "9437a09bb2ec20309efad877563e2eb3d46618034457c67565645b9ae37a952f",
+   "collection": "meetings",
+   "title": "Eye on North Liberty Muddy Creek Enhancements",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_d-ZdWWYhr8c_Eye on North Liberty Muddy Creek Enhancements.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_Db5QhIckync_Eye on North Liberty - Community Programs and Volunteering.txt": {
+   "fingerprint": "5350873bda9e62278cfcfb85a131a22828c86baa38b58d43857b95d867df38ff",
+   "collection": "meetings",
+   "title": "Eye on North Liberty - Community Programs and Volunteering",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_Db5QhIckync_Eye on North Liberty - Community Programs and Volunteering.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_di_Rc0MW0UQ_Blues  BBQ 2026.txt": {
+   "fingerprint": "628268eaea15713ee3d84d2d75dbd19c7a2096c05d3cebca6c2b180f8e5fcda4",
+   "collection": "meetings",
+   "title": "Blues BBQ 2026",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_di_Rc0MW0UQ_Blues  BBQ 2026.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_DpYYRqFEthA_Eye on North Liberty Outdoor Pool Delays.txt": {
+   "fingerprint": "930beb6d4cad31503719a3c4fc07b33a7a954cc1624a4cf47a6efd2a4f8ec267",
+   "collection": "meetings",
+   "title": "Eye on North Liberty Outdoor Pool Delays",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_DpYYRqFEthA_Eye on North Liberty Outdoor Pool Delays.txt#0"
+   ],
+   "chunks": 3
+  },
+  "meetings/video_EFxFmJgE0s4_North Liberty Planning  Zoning Commission on February 3 2026.txt": {
+   "fingerprint": "e2086d5b163e62d1833cddb6214f426b9a8d18e95fa3dfbdd2586d8e60994188",
+   "collection": "meetings",
+   "title": "North Liberty Planning Zoning Commission on February 3 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video_EFxFmJgE0s4_North Liberty Planning  Zoning Commission on February 3 2026.txt#0"
+   ],
+   "chunks": 9
+  },
+  "meetings/video_ExfKhqtZGtQ_North Liberty Library Board Meeting on January 26 2026.txt": {
+   "fingerprint": "41e87f97fe171b90122ea94e46a33a1f61438cbff91f5e22308d9169749899aa",
+   "collection": "meetings",
+   "title": "North Liberty Library Board Meeting on January 26 2026",
+   "department": "Library Board of Trustees",
+   "doc_ids": [
+    "meetings/video_ExfKhqtZGtQ_North Liberty Library Board Meeting on January 26 2026.txt#0"
+   ],
+   "chunks": 18
+  },
+  "meetings/video_f1tP6DsZ3wA_A Story of Hy-Vee Amphitheater and Centennial Park.txt": {
+   "fingerprint": "6ed745271a440921cae10107c6b26f88180de36aa55a83bfa0d6786b09990dcc",
+   "collection": "meetings",
+   "title": "A Story of Hy-Vee Amphitheater and Centennial Park",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_f1tP6DsZ3wA_A Story of Hy-Vee Amphitheater and Centennial Park.txt#0"
+   ],
+   "chunks": 2
+  },
+  "meetings/video_fK6WhcUEFVI_North Liberty Parks and Recreation Meeting September 3 2026.txt": {
+   "fingerprint": "7831df0052c584e7cb8c7a4679bc20659b828cad77ea63552afa2a6a39204fe7",
+   "collection": "meetings",
+   "title": "North Liberty Parks and Recreation Meeting September 3 2026",
+   "department": "Parks and Recreation Commission",
+   "doc_ids": [
+    "meetings/video_fK6WhcUEFVI_North Liberty Parks and Recreation Meeting September 3 2026.txt#0"
+   ],
+   "chunks": 25
+  },
+  "meetings/video_G0tR3G2GSIU_Eye on North Liberty Digital Resources.txt": {
+   "fingerprint": "470bdc79400223b64ae81337e2468dc7b9e9adbe2755f137d40c5a3bdb6635b6",
+   "collection": "meetings",
+   "title": "Eye on North Liberty Digital Resources",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_G0tR3G2GSIU_Eye on North Liberty Digital Resources.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_G4jZ-9-aJo0_North Liberty City Council Meeting on July 14  2026.txt": {
+   "fingerprint": "b7a56cbcff924fa191268f1e509423aa1168a426100e5eaf8624feaca294dc70",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on July 14 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_G4jZ-9-aJo0_North Liberty City Council Meeting on July 14  2026.txt#0"
+   ],
+   "chunks": 32
+  },
+  "meetings/video_gaKWsnV5tho_Metropolitan Planning Organization of Johnson County July 15 2026.txt": {
+   "fingerprint": "d41fbb9440d8b175602d73a5f5c088191b1c1c5706b0c2f44d0cd44e217863f1",
+   "collection": "meetings",
+   "title": "Metropolitan Planning Organization of Johnson County July 15 2026",
+   "department": "Metropolitan Planning Organization of Johnson County",
+   "doc_ids": [
+    "meetings/video_gaKWsnV5tho_Metropolitan Planning Organization of Johnson County July 15 2026.txt#0"
+   ],
+   "chunks": 20
+  },
+  "meetings/video_gU3oCeqHHoU_North Liberty Library Board Meeting on March 16 2026.txt": {
+   "fingerprint": "137694be6a91cf1da109f2884628884d45ed4283086d44ead046dda412011142",
+   "collection": "meetings",
+   "title": "North Liberty Library Board Meeting on March 16 2026",
+   "department": "Library Board of Trustees",
+   "doc_ids": [
+    "meetings/video_gU3oCeqHHoU_North Liberty Library Board Meeting on March 16 2026.txt#0"
+   ],
+   "chunks": 15
+  },
+  "meetings/video_gxhXVifGHXg_North Liberty Parks and Recreation meeting on August 6 2026.txt": {
+   "fingerprint": "18bcfeedb864009e7d28901f882f72beb20f2a753d86094ecfcdca1d8857b697",
+   "collection": "meetings",
+   "title": "North Liberty Parks and Recreation meeting on August 6 2026",
+   "department": "Parks and Recreation Commission",
+   "doc_ids": [
+    "meetings/video_gxhXVifGHXg_North Liberty Parks and Recreation meeting on August 6 2026.txt#0"
+   ],
+   "chunks": 41
+  },
+  "meetings/video_hzxQh_j6l54_Public Improvements 2026 Forevergreen Road  Jasper Avenue Improvements.txt": {
+   "fingerprint": "bfebd44100eaa1afc69db5d7f4b891498252a7d712b5ae9bfbd2bbb1c3395cfc",
+   "collection": "meetings",
+   "title": "Public Improvements 2026 Forevergreen Road Jasper Avenue Improvements",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_hzxQh_j6l54_Public Improvements 2026 Forevergreen Road  Jasper Avenue Improvements.txt#0"
+   ],
+   "chunks": 10
+  },
+  "meetings/video_iItCABmRboQ_North Liberty City Council Meeting on August 25 2026.txt": {
+   "fingerprint": "ea9259ce34f5df6217f5e261754d069a1aa08f3de5c3c2ab2fdcd01b1f9b4be3",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on August 25 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_iItCABmRboQ_North Liberty City Council Meeting on August 25 2026.txt#0"
+   ],
+   "chunks": 21
+  },
+  "meetings/video_KQB2B0a84cU_North Liberty Parks  Recreation Commission Thursday April 2 2026 700 PM.txt": {
+   "fingerprint": "19493c22af6ffd0712bb27ca65ed0cd7cd0372aba9af97017e45535f1c0e7d92",
+   "collection": "meetings",
+   "title": "North Liberty Parks Recreation Commission Thursday April 2 2026 700 PM",
+   "department": "Parks and Recreation Commission",
+   "doc_ids": [
+    "meetings/video_KQB2B0a84cU_North Liberty Parks  Recreation Commission Thursday April 2 2026 700 PM.txt#0"
+   ],
+   "chunks": 29
+  },
+  "meetings/video_KzH9OvS8AQI_North Liberty City  Council meeting on March 10 2026.txt": {
+   "fingerprint": "585185bbeb23a9474f1683e0b156f742935042ca6b217f8c1373f0e9d5bed323",
+   "collection": "meetings",
+   "title": "North Liberty City Council meeting on March 10 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_KzH9OvS8AQI_North Liberty City  Council meeting on March 10 2026.txt#0"
+   ],
+   "chunks": 49
+  },
+  "meetings/video_mCRKmtLmEVw_North Liberty City Slate.txt": {
+   "fingerprint": "71c0ba767a4a1ebb764da7891fa5855df97930ec7bcd50a484cd83ce1a290890",
+   "collection": "meetings",
+   "title": "North Liberty City Slate",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_mCRKmtLmEVw_North Liberty City Slate.txt#0"
+   ],
+   "chunks": 1
+  },
+  "meetings/video_n6jI233Mgp0_Eye on North Liberty Teen Dialogue Accelerator.txt": {
+   "fingerprint": "100856008fe0cc29beef78e7d3c193f1be75195db6ea767b216f4d8c93cad30a",
+   "collection": "meetings",
+   "title": "Eye on North Liberty Teen Dialogue Accelerator",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_n6jI233Mgp0_Eye on North Liberty Teen Dialogue Accelerator.txt#0"
+   ],
+   "chunks": 2
+  },
+  "meetings/video_nBXp12j_WIA_Public Improvements 2026 Centennial Park and Community Center.txt": {
+   "fingerprint": "f56ed7b9fe011cd17a9a9b158500d7a436483ec2c61a438b3fe368b3a1b57c58",
+   "collection": "meetings",
+   "title": "Public Improvements 2026 Centennial Park and Community Center",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_nBXp12j_WIA_Public Improvements 2026 Centennial Park and Community Center.txt#0"
+   ],
+   "chunks": 8
+  },
+  "meetings/video_oesWcPLcOpM_Eye on North Liberty The New Hy-Vee Amphitheater Events Schedule.txt": {
+   "fingerprint": "16b7d2bebd3f8deb1dd5715a0f1c839ff365bd84298a0f8106e1770c43d4fb66",
+   "collection": "meetings",
+   "title": "Eye on North Liberty The New Hy-Vee Amphitheater Events Schedule",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_oesWcPLcOpM_Eye on North Liberty The New Hy-Vee Amphitheater Events Schedule.txt#0"
+   ],
+   "chunks": 3
+  },
+  "meetings/video_OoufIDP7aqk_North Liberty Planning and Zoning meeting on April 7 2026.txt": {
+   "fingerprint": "0f7a12f7bc181cac4575fc0a3185cb6d5c831f88641af545197ee06f6073db7d",
+   "collection": "meetings",
+   "title": "North Liberty Planning and Zoning meeting on April 7 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video_OoufIDP7aqk_North Liberty Planning and Zoning meeting on April 7 2026.txt#0"
+   ],
+   "chunks": 6
+  },
+  "meetings/video_p3vHwhYv6Q0_North Liberty City Council Meeting on May 26 2026.txt": {
+   "fingerprint": "e809cf5d06e6b2575bf12f2223d82abe1067644439efcee2240880b19f3589bf",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on May 26 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_p3vHwhYv6Q0_North Liberty City Council Meeting on May 26 2026.txt#0"
+   ],
+   "chunks": 32
+  },
+  "meetings/video_pdXSx-1yfCA_North Liberty Parks  Recreation Commission March 5 2026.txt": {
+   "fingerprint": "4ecd5f3841dfb3e676add431f08c9526a296601140b8fc300f429efa2a9eb8b7",
+   "collection": "meetings",
+   "title": "North Liberty Parks Recreation Commission March 5 2026",
+   "department": "Parks and Recreation Commission",
+   "doc_ids": [
+    "meetings/video_pdXSx-1yfCA_North Liberty Parks  Recreation Commission March 5 2026.txt#0"
+   ],
+   "chunks": 23
+  },
+  "meetings/video_pNl-RFawhtE_City of North Liberty City Council meeting on June 9 2026.txt": {
+   "fingerprint": "44536366f436b5b29a201343286d84d57aa15a0a40a309cae2cae0679c3ce135",
+   "collection": "meetings",
+   "title": "City of North Liberty City Council meeting on June 9 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_pNl-RFawhtE_City of North Liberty City Council meeting on June 9 2026.txt#0"
+   ],
+   "chunks": 70
+  },
+  "meetings/video_PNU0I6bk1-8_North Liberty City Council Meeting on January 27 2026.txt": {
+   "fingerprint": "b7c4bb4c8b7ca711eb250136f5bd5b8b08036ac618a952c5194385c32e41fdfe",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on January 27 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_PNU0I6bk1-8_North Liberty City Council Meeting on January 27 2026.txt#0"
+   ],
+   "chunks": 53
+  },
+  "meetings/video_QpDD605JIug_North Liberty  Planning and Zoning March 3 2026.txt": {
+   "fingerprint": "5d7553a2f15098caccf75618a1b4cf3609449db4d7d62e36e7220c39bb7f3d44",
+   "collection": "meetings",
+   "title": "North Liberty Planning and Zoning March 3 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video_QpDD605JIug_North Liberty  Planning and Zoning March 3 2026.txt#0"
+   ],
+   "chunks": 16
+  },
+  "meetings/video_QSml2nM1U1I_Teen Dialogue Project.txt": {
+   "fingerprint": "f284c4357cad12395cc679630d2e2e625da08375a1d0990f32b43cc5bef58144",
+   "collection": "meetings",
+   "title": "Teen Dialogue Project",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_QSml2nM1U1I_Teen Dialogue Project.txt#0"
+   ],
+   "chunks": 2
+  },
+  "meetings/video_SQIGB3u6Fxg_North Liberty Planning Commission on May 5 2026.txt": {
+   "fingerprint": "6a60eee51c272081e1ceafe1ed890397a1360715ec7e0177295728d5a5e35968",
+   "collection": "meetings",
+   "title": "North Liberty Planning Commission on May 5 2026",
+   "department": "Planning and Zoning Commission",
+   "doc_ids": [
+    "meetings/video_SQIGB3u6Fxg_North Liberty Planning Commission on May 5 2026.txt#0"
+   ],
+   "chunks": 17
+  },
+  "meetings/video_u5pbp1MqFVs_North Liberty City Council Meeting on July 28 2026.txt": {
+   "fingerprint": "a21da75742d0b41d363f42896f76bb11453aa0bd542a2cd2359954c3dbf58b1a",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on July 28 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_u5pbp1MqFVs_North Liberty City Council Meeting on July 28 2026.txt#0"
+   ],
+   "chunks": 36
+  },
+  "meetings/video_VkIoV7-CPRg_North Liberty City Council on January 13 2026.txt": {
+   "fingerprint": "c07dde5527c4796e3af1014bd16b0fa7b3bb5cf074c6a2f0f94d38602cdbf146",
+   "collection": "meetings",
+   "title": "North Liberty City Council on January 13 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_VkIoV7-CPRg_North Liberty City Council on January 13 2026.txt#0"
+   ],
+   "chunks": 27
+  },
+  "meetings/video_vVjK8nOwdTc_North Liberty City Council April 14 2026.txt": {
+   "fingerprint": "eca72c21dd70889c5ef32069fea716d84e0f94941dbbc3f674c6326e3c47b254",
+   "collection": "meetings",
+   "title": "North Liberty City Council April 14 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_vVjK8nOwdTc_North Liberty City Council April 14 2026.txt#0"
+   ],
+   "chunks": 16
+  },
+  "meetings/video_VXKr1vmUFMk_North Liberty Library Board Meeting on July 20 2026.txt": {
+   "fingerprint": "4639c243efb04ebc4322328bafc47a0cf1db66ec1510c38f2534f6ce932940e9",
+   "collection": "meetings",
+   "title": "North Liberty Library Board Meeting on July 20 2026",
+   "department": "Library Board of Trustees",
+   "doc_ids": [
+    "meetings/video_VXKr1vmUFMk_North Liberty Library Board Meeting on July 20 2026.txt#0"
+   ],
+   "chunks": 21
+  },
+  "meetings/video_w2CZjLQ90Bg_City of North Liberty Library Board of Trustees June 15 2026.txt": {
+   "fingerprint": "03238f932dc780b7a069df91424fa56f72c5a4c907a39868790b687f0df9a624",
+   "collection": "meetings",
+   "title": "City of North Liberty Library Board of Trustees June 15 2026",
+   "department": "Library Board of Trustees",
+   "doc_ids": [
+    "meetings/video_w2CZjLQ90Bg_City of North Liberty Library Board of Trustees June 15 2026.txt#0"
+   ],
+   "chunks": 23
+  },
+  "meetings/video_WsCSJoOmUeY_Eye on North Liberty Duty Officer Program.txt": {
+   "fingerprint": "259e81053d84f19729dfebd1e5dc237571ab0ae8f43fe08a7001ad27ef789806",
+   "collection": "meetings",
+   "title": "Eye on North Liberty Duty Officer Program",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "meetings/video_WsCSJoOmUeY_Eye on North Liberty Duty Officer Program.txt#0"
+   ],
+   "chunks": 2
+  },
+  "meetings/video_X_ospXX24f4_North Liberty Parks and Recreation meeting on May 7  2026.txt": {
+   "fingerprint": "97c6adebb711aba155fbe29bfc6c0c64c5899ee438b54027239e4758273a103a",
+   "collection": "meetings",
+   "title": "North Liberty Parks and Recreation meeting on May 7 2026",
+   "department": "Parks and Recreation Commission",
+   "doc_ids": [
+    "meetings/video_X_ospXX24f4_North Liberty Parks and Recreation meeting on May 7  2026.txt#0"
+   ],
+   "chunks": 30
+  },
+  "meetings/video_Y7jAlSsUQj8_North Liberty Library Board of Trustees on April 20 2026.txt": {
+   "fingerprint": "22fd3868a56c769cf086741a369f39c0a65c52c393d2ecbec3f331d7c1b47b59",
+   "collection": "meetings",
+   "title": "North Liberty Library Board of Trustees on April 20 2026",
+   "department": "Library Board of Trustees",
+   "doc_ids": [
+    "meetings/video_Y7jAlSsUQj8_North Liberty Library Board of Trustees on April 20 2026.txt#0"
+   ],
+   "chunks": 18
+  },
+  "meetings/video_yGx_CYB7G_A_North Liberty City Council Meeting on April 28 2026.txt": {
+   "fingerprint": "ec19450c6a6771e05d2d765595ba19314c1e69b1199b40c4436cb146951b2cdd",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on April 28 2026",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_yGx_CYB7G_A_North Liberty City Council Meeting on April 28 2026.txt#0"
+   ],
+   "chunks": 19
+  },
+  "meetings/video_Z7_rV5rDCac_North Liberty City Council Meeting on February 24 2025.txt": {
+   "fingerprint": "199f05ec8aab87a09a34022c0187e40cae409fdc5b56b2c56e3f7fe691aca911",
+   "collection": "meetings",
+   "title": "North Liberty City Council Meeting on February 24 2025",
+   "department": "City Council",
+   "doc_ids": [
+    "meetings/video_Z7_rV5rDCac_North Liberty City Council Meeting on February 24 2025.txt#0"
+   ],
+   "chunks": 33
+  },
+  "official/Library Services FAQ.txt": {
+   "fingerprint": "279de29a12e2e8bbf1282d6d1f2f5c6ead1c73d723b26b71cd91de85aba903ef",
+   "collection": "official",
+   "title": "Library Services FAQ (staff-maintained)",
+   "department": "Library",
+   "doc_ids": [
+    "official/Library Services FAQ.txt#0"
+   ],
+   "chunks": 2
+  },
+  "official/NLL-Policy-Manual-NOV2026.pdf": {
+   "fingerprint": "e5d6a45d52e2491b580b8932578124640a8e44d783cb6ed315ce7db271a0e81c",
+   "collection": "official",
+   "title": "Library Policy Manual (November 2026)",
+   "department": "Library",
+   "doc_ids": [
+    "official/NLL-Policy-Manual-NOV2026.pdf#0",
+    "official/NLL-Policy-Manual-NOV2026.pdf#1",
+    "official/NLL-Policy-Manual-NOV2026.pdf#2",
+    "official/NLL-Policy-Manual-NOV2026.pdf#3",
+    "official/NLL-Policy-Manual-NOV2026.pdf#4",
+    "official/NLL-Policy-Manual-NOV2026.pdf#5",
+    "official/NLL-Policy-Manual-NOV2026.pdf#6",
+    "official/NLL-Policy-Manual-NOV2026.pdf#7",
+    "official/NLL-Policy-Manual-NOV2026.pdf#8",
+    "official/NLL-Policy-Manual-NOV2026.pdf#9",
+    "official/NLL-Policy-Manual-NOV2026.pdf#10",
+    "official/NLL-Policy-Manual-NOV2026.pdf#11",
+    "official/NLL-Policy-Manual-NOV2026.pdf#12",
+    "official/NLL-Policy-Manual-NOV2026.pdf#13",
+    "official/NLL-Policy-Manual-NOV2026.pdf#14",
+    "official/NLL-Policy-Manual-NOV2026.pdf#15",
+    "official/NLL-Policy-Manual-NOV2026.pdf#16",
+    "official/NLL-Policy-Manual-NOV2026.pdf#17",
+    "official/NLL-Policy-Manual-NOV2026.pdf#18",
+    "official/NLL-Policy-Manual-NOV2026.pdf#19",
+    "official/NLL-Policy-Manual-NOV2026.pdf#20",
+    "official/NLL-Policy-Manual-NOV2026.pdf#21",
+    "official/NLL-Policy-Manual-NOV2026.pdf#22",
+    "official/NLL-Policy-Manual-NOV2026.pdf#23",
+    "official/NLL-Policy-Manual-NOV2026.pdf#24",
+    "official/NLL-Policy-Manual-NOV2026.pdf#25",
+    "official/NLL-Policy-Manual-NOV2026.pdf#26",
+    "official/NLL-Policy-Manual-NOV2026.pdf#27",
+    "official/NLL-Policy-Manual-NOV2026.pdf#28",
+    "official/NLL-Policy-Manual-NOV2026.pdf#29",
+    "official/NLL-Policy-Manual-NOV2026.pdf#30",
+    "official/NLL-Policy-Manual-NOV2026.pdf#31",
+    "official/NLL-Policy-Manual-NOV2026.pdf#32",
+    "official/NLL-Policy-Manual-NOV2026.pdf#33"
+   ],
+   "chunks": 51
+  },
+  "official/Opening and Closing Procedures - updated 7.2026.pdf": {
+   "fingerprint": "5a9b57e51ae0792fac8a0ea41260308572352c359f22b2babac342c1402c2e94",
+   "collection": "official",
+   "title": "Library Opening and Closing Procedures (July 2026)",
+   "department": "Library",
+   "doc_ids": [
+    "official/Opening and Closing Procedures - updated 7.2026.pdf#0",
+    "official/Opening and Closing Procedures - updated 7.2026.pdf#1"
+   ],
+   "chunks": 2
+  },
+  "official/web_0.txt": {
+   "fingerprint": "3fab546a9f49b3747191072990152baed32db74849756e1a8fdf4c17dbc206b8",
+   "collection": "official",
+   "title": "Accessibility",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_0.txt#0"
+   ],
+   "chunks": 5
+  },
+  "official/web_1.txt": {
+   "fingerprint": "6915717d0d76cabddcb300c24d52a8af02bdf14131cae14417a85015f99e3712",
+   "collection": "official",
+   "title": "Adventure Pass",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_1.txt#0"
+   ],
+   "chunks": 5
+  },
+  "official/web_2.txt": {
+   "fingerprint": "33bb797ed7f10dde9883036f330f15b4cbb2254c892a8435360c25426c75acc6",
+   "collection": "official",
+   "title": "Book Bike",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_2.txt#0"
+   ],
+   "chunks": 3
+  },
+  "official/web_3.txt": {
+   "fingerprint": "4ae8f52a11fe92151186167deaeb707d65fd1324f252f41becb2ccfa5bd9868c",
+   "collection": "official",
+   "title": "Storywalk",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_3.txt#0"
+   ],
+   "chunks": 2
+  },
+  "official/web_4.txt": {
+   "fingerprint": "9aa365cfeb7544a9f243e73e20e2d4fa895965f6a1052ba8f1ba881ffdc40010",
+   "collection": "official",
+   "title": "Reading Challenges",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_4.txt#0"
+   ],
+   "chunks": 3
+  },
+  "official/web_5.txt": {
+   "fingerprint": "b9b0cb3d151716208fddd700627f190ad86c4364f35478425448ed24f2f107fc",
+   "collection": "official",
+   "title": "Seeds, Plants and Gardening",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_5.txt#0"
+   ],
+   "chunks": 3
+  },
+  "official/web_6.txt": {
+   "fingerprint": "52e100e4d6b7feda32cce1c547b96f72f6d7d845800a5aa79bee2e54966612b7",
+   "collection": "official",
+   "title": "Resources",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_6.txt#0"
+   ],
+   "chunks": 19
+  },
+  "official/web_7.txt": {
+   "fingerprint": "0463a3c6f9b2ddd974c516e05c50f9ecb59642a8539174677958e2ea91a9978e",
+   "collection": "official",
+   "title": "Room Reservations",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_7.txt#0"
+   ],
+   "chunks": 2
+  },
+  "official/web_8.txt": {
+   "fingerprint": "0ad51e390da3cb0204bd7f0b58a825fb62f62f2eb26b6bfe9d89e2971223779b",
+   "collection": "official",
+   "title": "Event Calendar",
+   "department": "Library",
+   "doc_ids": [
+    "official/web_8.txt#0"
+   ],
+   "chunks": 15
+  },
+  "official/web_9.txt": {
+   "fingerprint": "eb693ba6c8d6f3fded0e134672bb1fe3e4582ca7aa7bf5dea06cb4dbdf8f0ed8",
+   "collection": "official",
+   "title": "Board & Commissions | City of North Liberty",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "official/web_9.txt#0"
+   ],
+   "chunks": 11
+  }
+ }
+}
