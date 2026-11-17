@@ -24,6 +24,44 @@ from llama_index.llms.openrouter import OpenRouter
 
 PERSIST_DIR = "./storage"
 
+# ---------------------------------------------------------------------------
+# What visitors see. All the wording lives here so it's easy to change, and
+# so other libraries have one place to edit (a settings file is planned).
+# Colors and fonts are in .streamlit/config.toml, not here.
+# ---------------------------------------------------------------------------
+APP_NAME = "MordecAI"
+APP_TAGLINE = "Library & City Info Assistant"
+APP_VERSION = "v0.1"
+LIBRARY_NAME = "North Liberty Library"
+REPO_URL = "https://github.com/nshimmin/library-asist"
+
+INTRO = "Ask about library policies, services, events, and city meetings."
+PROTOTYPE_NOTE = (f"Prototype {APP_VERSION}. Answers can be wrong, so check the sources "
+                  "under each answer or ask library staff.")
+# Shown only when the gap log is switched on (see log_gap), so the notice is
+# only ever shown when it's true.
+PRIVACY_NOTE = ("If I can't answer, your question (no names) is saved so staff can improve "
+                "the library's information. Please don't include personal details.")
+
+# Clickable starter questions. Pick ones the assistant answers reliably.
+# Keep this short: a long list pushes the page taller than a phone screen.
+EXAMPLE_QUESTIONS = [
+    "Can I get something notarized?",
+    "How much does it cost to print?",
+    "Who is on the library board?",
+    "What did the city council say about the pool?",
+]
+
+ASSISTANT_AVATAR = ":material/menu_book:"
+USER_AVATAR = ":material/person:"
+
+# Must be the first Streamlit command in the script.
+st.set_page_config(
+    page_title=f"{APP_NAME} | {LIBRARY_NAME}",
+    page_icon="📚",
+    layout="centered",
+)
+
 
 def get_secret(name: str):
     """Read a value from Streamlit secrets, falling back to an environment variable."""
@@ -250,25 +288,58 @@ def show_searches(searches):
             st.text(s["results"])
 
 
-st.title("MordecAI v0.1: Library & City Info Assistant")
-st.write("Ask about library policies, city meetings, and more.")
-st.caption(f"Model: {model_label}")
+AVATARS = {"user": USER_AVATAR, "assistant": ASSISTANT_AVATAR}
+# The privacy notice only applies when the gap log is on (see log_gap)
+GAP_LOG_ON = bool(get_secret("github_token") and get_secret("gap_issue_number"))
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+
+def clear_chat():
+    st.session_state.messages = []
+
+
+# Sidebar: what this is, how to check it, and a way to wipe the screen
+# (useful on a shared library computer).
+with st.sidebar:
+    st.header("About")
+    st.write("I answer questions using the library's and the city's own documents: "
+             "policies, web pages, a staff FAQ, and recordings of public meetings. "
+             "Every answer lists its sources, and “How I found this” shows exactly "
+             "what I searched for and read.")
+    st.caption(f"Model: {model_label}. The AI models are open-weight, and the "
+               f"[code is open source]({REPO_URL}).")
+
+st.title(APP_NAME)
+st.markdown(f"**{APP_TAGLINE}.** {INTRO}")
+st.caption(PROTOTYPE_NOTE)
+
+# Starter questions, shown only until the first question is asked.
+welcome = st.empty()
+clicked = None
+if not st.session_state.messages:
+    with welcome.container():
+        st.markdown("**Try asking:**")
+        for i, example in enumerate(EXAMPLE_QUESTIONS):
+            if st.button(example, key=f"example_{i}", icon=":material/search:"):
+                clicked = example
+        if GAP_LOG_ON:
+            st.caption(PRIVACY_NOTE)
+
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    with st.chat_message(message["role"], avatar=AVATARS[message["role"]]):
         st.markdown(message["content"])
         show_searches(message.get("searches"))
 
-if prompt := st.chat_input("Ask a question..."):
+if prompt := (st.chat_input("Ask a question...") or clicked):
+    welcome.empty()   # hide the starter questions
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar=USER_AVATAR):
         st.markdown(prompt)
 
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
+    with st.chat_message("assistant", avatar=ASSISTANT_AVATAR):
+        with st.spinner("Searching our documents..."):
             response, searches = ask_agent(prompt)
         answer = str(response).replace("$", "\\$")
         if GAP_PHRASE in answer.replace("’", "'").lower():
@@ -277,3 +348,8 @@ if prompt := st.chat_input("Ask a question..."):
         show_searches(searches)
 
     st.session_state.messages.append({"role": "assistant", "content": answer, "searches": searches})
+
+# Added last so the button shows up right after the first answer
+if st.session_state.messages:
+    with st.sidebar:
+        st.button("Clear chat", on_click=clear_chat, icon=":material/delete:")

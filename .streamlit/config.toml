@@ -1,0 +1,36 @@
+# Look and feel of the app. Streamlit reads this file automatically.
+# Change a color here and the whole app follows; no code edits needed.
+# Other libraries: swap the colors below for your own brand colors.
+#
+# Contrast check: every text/background pair below is at least 4.5:1
+# (the WCAG AA standard for readable text). Re-check if you change colors:
+# https://webaim.org/resources/contrastchecker/
+#
+# Needs Streamlit 1.67 or newer (earlier versions ignore [theme.light]/[theme.dark]).
+
+[client]
+# "minimal" hides the developer menu (Deploy, rerun, etc.) from visitors.
+toolbarMode = "minimal"
+
+[theme]
+# Rounded corners and a slightly larger base text size (easier to read).
+baseRadius = "0.75rem"
+baseFontSize = 17
+font = "sans-serif"   # a built-in font: nothing is downloaded from Google or anywhere else
+paddingTop = "4rem"   # less empty space above the title, so more of the page fits on a phone
+
+# Used when the visitor's device is set to light mode.
+[theme.light]
+primaryColor = "#0B6464"
+backgroundColor = "#FBFAF7"
+secondaryBackgroundColor = "#F0EDE4"
+textColor = "#1F2A2A"
+linkColor = "#0B6464"
+
+# Used when the visitor's device is set to dark mode.
+[theme.dark]
+primaryColor = "#6FD0CB"
+backgroundColor = "#101818"
+secondaryBackgroundColor = "#1B2727"
+textColor = "#E9EFEF"
+linkColor = "#6FD0CB"
