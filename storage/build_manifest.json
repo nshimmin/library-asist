@@ -602,7 +602,7 @@
    "chunks": 33
   },
   "official/Library Services FAQ.txt": {
-   "fingerprint": "29519ada1d1c7242c22141798a8c3834626b6c07bc0f93ffe6c73b2dced6168f",
+   "fingerprint": "8eb7de4a011ff5f204b57744e2d693ef168dcc79f805178e2bea148775ebc75e",
    "collection": "official",
    "title": "Library Services FAQ (staff-maintained)",
    "department": "Library",
@@ -744,16 +744,6 @@
     "official/web_7.txt#0"
    ],
    "chunks": 2
-  },
-  "official/web_8.txt": {
-   "fingerprint": "0ad51e390da3cb0204bd7f0b58a825fb62f62f2eb26b6bfe9d89e2971223779b",
-   "collection": "official",
-   "title": "Event Calendar",
-   "department": "Library",
-   "doc_ids": [
-    "official/web_8.txt#0"
-   ],
-   "chunks": 15
   },
   "official/web_9.txt": {
    "fingerprint": "eb693ba6c8d6f3fded0e134672bb1fe3e4582ca7aa7bf5dea06cb4dbdf8f0ed8",

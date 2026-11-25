@@ -11,15 +11,15 @@ Questions with known right answers, used to check whether a change actually impr
 | # | Question | What a right answer says | In the documents? | Notes |
 |---|---|---|---|---|
 | 1 | When is the next library board meeting? | Ideally: no confirmed date found; the Library Board usually meets the third Monday of the month (so likely Nov 16); check the city meeting calendar | Only the rule (Boards & Commissions page: "usually meets the third Monday"; bylaws: ten meetings a year, dates set at the annual meeting); no official calendar of upcoming meetings | **Source gap** (CivicClerk). "Couldn't find it" is acceptable; must never use another board's schedule. **A confident wrong date is the worst outcome.** |
-| 2 | Does the library offer language learning classes? | Yes. ESL class (Tuesdays) and Mango language learning (online) | Yes (calendar; Resources page; Digital Resources video) | |
-| 3 | When is the next storytime? | Next date from the calendar | Yes (calendar snapshot) | Long-term fix: RSS events tool |
+| 2 | Does the library offer language learning classes? | Yes. ESL class (Tuesdays) and Mango language learning (online) | Yes (Resources page; Digital Resources video). The ESL class was only in the calendar snapshot, removed Nov 25. | Until the RSS events tool, a right answer names the online options (Mango, LingQ) and doesn't claim an ESL class. |
+| 3 | When is the next storytime? | Next date from the calendar | **No, since Nov 25** (calendar snapshot removed: WhoFi's robots.txt blocks automated access) | **Source gap** until the RSS events tool. Right answer for now: "couldn't find" plus "ask library staff." Must not present StoryWalk as storytime or give a date. |
 | 4 | Can I reserve a study room online? | Yes, through the Room Reservations page | Yes (Room Reservations page; policy manual) | The Proctoring policy also says students book study rooms "using the library's online booking software available on the library website." Check whether that's still accurate. |
 | 5 | Who is on the library board? | The trustees' names (Scott Kramer, Brandy Greene, Scott Clemons, …) | Yes (Boards & Commissions page) | |
 | 6 | What is the StoryWalk? | Description from the web page | Yes (web page) | |
 | 7 | Can I get something notarized? | Yes, with exceptions (no subpoenas, wills, or estates; call ahead) | Yes (staff FAQ) | |
 | 8 | Can I fax something at the library? | Yes, at no cost | Only inside the Proctoring policy (Policy Manual p. 23) | **Source issue:** fax is documented only in one sentence of the exam-proctoring section, so answers tie it to proctoring. Fix at the source (policy manual or services page), not the FAQ. |
 | 9 | How much does it cost to print? | $3 free per day, then $.10/page black and white, $.50/page color; scanning to email is free | Yes (Policy Manual p. 10, "Equipment Use") | |
-| 10 | What about programs for kids? | Specific programs from the calendar: Baby, Toddler, and Saturday Storytime, Lego Creations, Super Tuesday, T&T | Yes (calendar snapshot) | Long-term fix: RSS events tool |
+| 10 | What about programs for kids? | Specific programs from the calendar: Baby, Toddler, and Saturday Storytime, Lego Creations, Super Tuesday, T&T | **Partly, since Nov 25:** ongoing programs on web pages (1000 Books Before Kindergarten, Summer Reading, StoryWalk); the dated programs were only in the calendar snapshot, removed Nov 25 | Full answer waits for the RSS events tool. For now: the ongoing programs, with no event dates. |
 
 Earlier questions, still worth running:
 
