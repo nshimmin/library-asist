@@ -42,5 +42,5 @@ Changes to `data/`, `sources.py`, `sources.json`, or `build_index.py` need `pyth
 | `sources.json` | The catalog: title, web address, department per file |
 | `build_index.py` | Updates `storage/` from `data/`: only new, changed, or removed documents (`--full` for everything) |
 | `check_search.py` | Search diagnostics |
-| `webimport.py`, `youtubeimport.py`, `pdfimport.py` | Import scripts (to be replaced by one import script; see "Next up") |
+| `intake.py` | Files documents from `inbox/` (files, `links.txt`) into `data/` collections and `sources.json`; report in `inbox/REPORT.md`. `--refresh` re-downloads web pages. Needs `requirements-intake.txt`. |
 | `data/` | Documents. Each folder is a collection (`official/`, `meetings/`). `storage/` is the built index (commit it), with `build_manifest.json` (each document's fingerprint and chunk count). |

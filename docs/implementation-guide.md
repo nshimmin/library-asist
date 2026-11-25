@@ -44,13 +44,13 @@ Technically it's a **retrieval-augmented (RAG) assistant**: it searches your doc
 
 *Check PyMuPDF's license terms for your use; it's dual-licensed.
 
-**Used only by the import scripts** (installed in Codespaces, not needed by the app):
+**Used only for adding documents** (`intake.py`; listed in `requirements-intake.txt`, not needed by the app):
 
 | Package | Purpose | License |
 |---|---|---|
 | `trafilatura` | Downloads web pages and keeps only the main content (drops menus, footers) | Apache 2.0 |
-| `html2text` | Saves a whole page as text, links included (for listing pages); comes with `llama-index-readers-web` | GPL 3.0 |
-| `llama-index-readers-web` | Web readers, used by some scripts | MIT |
+| `html2text` | Saves a whole page as text, links included (for listing pages) | GPL 3.0 |
+| `youtube-transcript-api` | Gets the captions of meeting videos (see the note in section 9) | MIT |
 | `torch` (CPU version) | Needed to build the search index | BSD |
 
 **Planned:** pin exact package versions (or a lock file) before packaging. Unpinned installs can stall for a long time while pip works out which versions fit together.
@@ -79,9 +79,9 @@ The embedding model and reranker download once from Hugging Face and run inside 
 | `storage/` | The search index built from `data/` (commit it; don't let the app rebuild it). `storage/build_manifest.json` records each document's fingerprint, collection, and chunk count. |
 | `sources.json` | "Card catalog": a readable title and web link for each document |
 | `build_index.py` | Updates `storage/` from `data/`, processing only new, changed, or removed documents (`--full` rebuilds everything) |
-| `webimport.py` | Downloads web pages into `data/official/` and updates `sources.json` |
-| `youtubeimport.py` | Downloads meeting-video transcripts into `data/meetings/` |
-| `pdfimport.py` | PDF import helper |
+| `intake.py` | Files new documents: drop files in `inbox/` or add links to `inbox/links.txt`, and it puts each in the right collection, adds it to `sources.json`, and writes a report (`inbox/REPORT.md`). `--refresh` downloads every saved web page again. |
+| `inbox/` | Where new documents go (`links.txt` for web addresses) |
+| `sources_raw/` | Originals of converted documents (web pages as downloaded) |
 | `check_search.py` | Shows what the search finds for a question, step by step, with scores (no AI cost) |
 
 ---
@@ -89,7 +89,7 @@ The embedding model and reranker download once from Hugging Face and run inside 
 ## 3. Setup, step by step
 
 1. **Copy the repository** to your own GitHub account.
-2. **Replace the documents** in `data/official/` and `data/meetings/` with your own (see section 4), and edit the URL list in `webimport.py`.
+2. **Replace the documents** in `data/official/` and `data/meetings/` with your own (see section 4), and list your web pages and meeting videos in `inbox/links.txt` (section 5).
 3. **Edit the library name** in `app.py` (the system prompt and title). *A settings file to make this easier is planned.*
 4. **Build the index** in Codespaces (see section 5), then commit `data/`, `sources.json`, and `storage/`.
 5. **Get a Groq API key** at console.groq.com.
@@ -146,17 +146,17 @@ The embedding model and reranker download once from Hugging Face and run inside 
 
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt trafilatura llama-index-readers-web
+pip install -r requirements.txt -r requirements-intake.txt
 ```
 
 Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly froze while downloading; GitHub's default image starts quickly. Stop the codespace when done (it uses free monthly hours).
 
 **Adding or updating documents:**
 1. `git pull`
-2. Put files in the right collection folder (`data/official/` or `data/meetings/`), or run an import script (`python webimport.py`).
+2. Drop files in `inbox/` and add web addresses to `inbox/links.txt`, then run `python intake.py`. Read `inbox/REPORT.md`: it lists where each document went and anything to check (a title taken from the file name, a missing web address, a guessed department).
 3. `python build_index.py`. It only processes documents that are new, changed, moved, or removed, and lists them. The first build (or `python build_index.py --full`) does everything and is slow; after that a small edit takes seconds.
 4. `python check_search.py "a question about the new content"` to confirm it's found.
-5. Commit and push `data`, `sources.json`, and `storage`.
+5. Commit and push `inbox`, `data`, `sources_raw`, `sources.json`, and `storage`.
 6. The app notices the new index and reloads it on its own.
 
 **What needs a rebuild:**
@@ -167,11 +167,28 @@ Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly fr
 | Anything in `data/` (FAQ, policy manual, web pages), or a title or department in `sources.json` | Yes: `build_index.py` (only the affected documents), then push. |
 | Embedding model or chunk sizes (`search.py`), department rules (`sources.py`) | Yes. `build_index.py` rebuilds everything on its own, since every chunk changes. |
 
+**What `intake.py` does with each item:**
+
+| Item | Goes to | How |
+|---|---|---|
+| YouTube link | `data/meetings/` | The video's captions, with its title, date, and video ID at the top |
+| Other web link | `data/official/` | The page's main content (menus and footers dropped); the page as downloaded is kept in `sources_raw/web/` |
+| PDF, text, or Markdown file | `data/official/` | Filed as it is (PDFs stay PDFs, so answers can cite page numbers) |
+| Text file that starts like a transcript (`Title:` / `Published:` / `Video ID:`) | `data/meetings/` | Filed as it is |
+| A file in `inbox/<folder>/` | `data/<folder>/` | Your choice overrides the guess |
+| Word, PowerPoint, Excel | stays in the inbox | Converters are planned; save it as a PDF for now |
+
+Each document gets a catalog entry in `sources.json` (title, web address, and `via`: web, youtube, or file). Dropping a file with the same name as an earlier file replaces it (a new version of the FAQ, say); a web page or transcript can only be updated by importing its link again.
+
 **Adding a web page:**
-1. Add its URL to the `urls` list in `webimport.py`. **Keep the order the same** (files are numbered by position); add new pages at the end.
-2. Run `python webimport.py` and skim the saved file in `data/official/`.
-3. Most pages: done. trafilatura keeps the main content and drops menus and footers.
-4. **Listing pages** (event calendars, staff directories, lists of databases) are different: their links *are* the content, and trafilatura drops link text. If the saved file is missing titles or names, add the URL to `WHOLE_PAGE_URLS` in `webimport.py` and re-run. That page is then saved whole.
+1. Add its address to `inbox/links.txt` and run `python intake.py`. Skim the saved file in `data/official/`.
+2. Most pages: done. trafilatura keeps the main content and drops menus and footers.
+3. **Listing pages** (event calendars, staff directories, lists of databases) are different: their links *are* the content, and trafilatura drops link text. If the saved file is missing titles or names, add the address again with `whole-page` after it. That page is then saved whole (marked `"whole_page": true` in `sources.json`).
+4. **Keeping pages current:** `python intake.py --refresh` downloads every saved web page again; the report says which ones changed.
+
+**Rules the intake follows:** it reads each site's `robots.txt` and won't download pages the site asks automated tools not to fetch (the report says so, and any saved copy is kept). If the site's `robots.txt` has a `Content-Signal` line (how the site says AI may use its content), the report shows it so you can decide.
+
+**Meeting dates:** the date at the top of a transcript comes from the YouTube Data API, which needs a free API key in the `youtube_api` environment variable. Without one, the date is left as "unknown" and flagged in the report.
 
 **Collections:** each folder in `data/` is one collection, searched by its own tool, so the many meeting transcripts can't crowd out official answers. To move a document to another collection, move its file to that folder and run `build_index.py`. Files left directly in `data/` are treated as official.
 
@@ -203,7 +220,7 @@ Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly fr
 ## 7. Built-in features
 
 - **Source line:** every chunk is stamped with its document's title and department (e.g., "Room Reservations / Library"), so a section keeps its context and the search can tell boards apart. On pages that cover several boards, each section gets its own department from its heading.
-- **Two collections:** official documents and meeting transcripts are searched by separate tools, so transcripts (most of the text) can't crowd out official answers. Files whose names start with `video_` (from `youtubeimport.py`) count as meeting transcripts. The assistant picks the tool from each tool's description; "How I found this" shows which it used.
+- **Two collections:** official documents and meeting transcripts are searched by separate tools, so transcripts (most of the text) can't crowd out official answers. Each collection is a folder in `data/` (`official/`, `meetings/`). The assistant picks the tool from each tool's description; "How I found this" shows which it used.
 - **Hybrid search:** meaning search and keyword search each find candidates; the lists are merged, a reranker re-scores them, and only passages above a cutoff go to the model (up to 5). Weak matches are dropped, which is what lets the assistant say "I couldn't find anything."
 - **Source citations:** every answer ends with a "Sources:" list with links, limited to passages actually used.
 - **"How I found this":** under each answer, the search query and passages, so anyone can check how an answer was made.
@@ -225,7 +242,9 @@ Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly fr
 
 ## 9. Known limitations (current prototype)
 
-- Rebuilds process every document each time and run by hand in Codespaces. Planned: builds that only process new or changed files, run automatically by GitHub Actions, with one import script that files each document in the right place.
+- `intake.py` and `build_index.py` are run by hand in Codespaces. Planned: run automatically by GitHub Actions when something lands in the inbox.
+- Word, PowerPoint, and Excel files can't be added yet (save them as PDFs); converters are planned.
+- **Meeting transcripts come through `youtube-transcript-api`,** which reads YouTube's captions the way the YouTube player does, not through an official, documented feed, so it could stop working without notice. The official route is the YouTube Data API's captions download, which needs the channel owner (usually the city's communications staff) to sign in. Worth arranging with them.
 - The index is stored as files in the repository; GitHub's 100 MB file limit will eventually require a small database file for large collections.
 
 - Meeting transcripts are automatic captions: messy, and they use relative dates ("next month"). The prompt forbids taking dates, fees, or rules from them as current.
