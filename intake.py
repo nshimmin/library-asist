@@ -2,8 +2,9 @@
 
 Drop files in inbox/, or add web addresses to inbox/links.txt, then run:
 
-  python intake.py             # file everything in the inbox
-  python intake.py --refresh   # download every saved web page again
+  python intake.py                 # file everything in the inbox
+  python intake.py --chapters 22   # city code: file only these chapters (e.g. 22,23 or 20-26)
+  python intake.py --refresh       # download every saved web page again
 
 Then run python build_index.py.
 
@@ -12,7 +13,12 @@ Where things go:
   any other web link               -> data/official/   (the page's main content)
   a file (PDF, text, Markdown)     -> data/official/   (the safe default)
   a meeting transcript text file   -> data/meetings/   (starts with Title / Published / Video ID)
+  a city code (code of ordinances) -> data/city_code/  (one file per chapter; see city_code.py)
   a file in inbox/<folder>/        -> data/<folder>/   (your choice overrides the guess)
+
+The city code's full text is kept in sources_raw/city_code/. To add more
+chapters later, run  python intake.py --chapters <numbers>  with nothing new
+in the inbox, and the saved copy is used.
 
 Each document is added to sources.json, the catalog (title, web address).
 The report, inbox/REPORT.md, lists what went where and anything to check.
@@ -34,7 +40,8 @@ from urllib.robotparser import RobotFileParser
 
 import requests
 
-import sources   # department rules, so the report can show each document's department
+import city_code   # splits a code of ordinances into chapters
+import sources     # department rules, so the report can show each document's department
 
 INBOX = Path("inbox")
 LINKS = INBOX / "links.txt"
@@ -45,6 +52,8 @@ CATALOG = Path("sources.json")
 
 DEFAULT_COLLECTION = "official"
 MEETINGS = "meetings"
+CITY_CODE = "city_code"
+LIST_EACH = 10    # report each chapter by name up to this many; more get one summary line
 FILED_AS_IS = {".pdf", ".txt", ".md"}   # Word, PowerPoint, and Excel need converters (planned)
 WHOLE_PAGE = "whole-page"               # the mark in links.txt for listing pages
 SHORT_PAGE = 500                        # characters; less than this gets flagged in the report
@@ -280,6 +289,15 @@ def import_youtube(url, video_id, catalog, report):
 
 
 # ---- Files ---------------------------------------------------------------------
+def document_start(path):
+    """The first few thousand characters of a text file, or of a PDF's first pages."""
+    if path.suffix.lower() == ".pdf":
+        import fitz   # PyMuPDF
+        with fitz.open(path) as pdf:
+            return "".join(pdf[i].get_text() for i in range(min(2, pdf.page_count)))[:3000]
+    return path.read_text(encoding="utf-8", errors="replace")[:3000]
+
+
 def is_transcript(path):
     """Does this text file start like a meeting transcript (Title / Published / Video ID)?"""
     if path.suffix.lower() != ".txt":
@@ -310,7 +328,77 @@ def file_title(path):
     return " ".join(re.sub(r"[_-]+", " ", path.stem).split()), "the file name"
 
 
-def import_file(path, catalog, report):
+def chapter_file_name(chapter):
+    title = re.sub(r'[\\/:*?"<>|#%]', "", chapter["title"])[:70].strip(" .")
+    return f"Chapter {chapter['number']} - {title}.txt"
+
+
+def import_city_code(path, catalog, report, wanted):
+    """Split a code of ordinances into chapter files in data/city_code/, and
+    keep the full text in sources_raw/city_code/. wanted: which chapters
+    (None = all of them). Returns CITY_CODE, so intake() knows a code was handled."""
+    text = path.read_text(encoding="utf-8", errors="replace")
+    chapters = city_code.split_chapters(text)
+    chosen = [c for c in chapters if wanted is None or wanted(c["number"])]
+    if not chosen:
+        report.not_filed.append(f"{path.name}: none of its chapters match --chapters.")
+        return CITY_CODE
+
+    filed, empty = [], []
+    for chapter in chosen:
+        if not chapter["text"]:
+            empty.append(chapter["number"])
+            continue
+        name = chapter_file_name(chapter)
+        target = DATA / CITY_CODE / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        status = ("new" if not target.exists() else
+                  "unchanged" if target.read_text(encoding="utf-8") == chapter["text"] else "updated")
+        target.write_text(chapter["text"], encoding="utf-8")
+        entry = catalog.setdefault(name, {})
+        entry.update({"title": f"City Code Chapter {chapter['number']}: {chapter['title']}",
+                      "via": "city code"})
+        entry.setdefault("department", sources.DEFAULT_DEPARTMENT)   # city law, enacted by the council
+        filed.append((name, status, chapter["sections"]))
+
+    if path.parent != RAW / CITY_CODE:   # from the inbox: keep the full text for later chapters
+        raw = RAW / CITY_CODE / path.name
+        raw.parent.mkdir(parents=True, exist_ok=True)
+        # Keep only the latest copy, so a later --chapters run can't use an older one
+        for older in raw.parent.glob("*.txt"):
+            if older.name != path.name:
+                older.unlink()
+                report.check.append(f"{RAW.as_posix()}/{CITY_CODE}/{older.name}: replaced by "
+                                    f"{path.name} as the saved copy of the code (the old copy "
+                                    f"stays in git history). Chapters filed from the old copy "
+                                    f"are updated when you run --chapters again.")
+        shutil.move(path, raw)
+
+    if len(filed) <= LIST_EACH:
+        for name, status, sections in filed:
+            report.filed.append(f"{CITY_CODE}/{name} ({status}): {sections} sections, "
+                                f"{describe(name, catalog)}")
+    else:
+        counts = {s: sum(1 for _, st, _ in filed if st == s) for s in ("new", "updated", "unchanged")}
+        report.filed.append(f"{CITY_CODE}/: {len(filed)} chapters from {path.name} ("
+                            + ", ".join(f"{n} {s}" for s, n in counts.items() if n) + ")")
+    if empty:
+        report.check.append(f"Not filed because they're repealed or reserved: chapter(s) "
+                            f"{', '.join(empty)}.")
+    if wanted is not None and len(chosen) < len(chapters):
+        report.check.append(f"{len(chapters) - len(chosen)} other chapters weren't filed (--chapters). "
+                            f"The full code is kept in {RAW.as_posix()}/{CITY_CODE}/; run "
+                            f"python intake.py --chapters <numbers> to add more.")
+    if filed and not any(catalog[n].get("url") for n, _, _ in filed):
+        report.check.append(f"{CITY_CODE}/: the chapters have no web address, so answers can't "
+                            f"link to them. Add a \"url\" in sources.json for each (for example, "
+                            f"the chapter on the city's online code).")
+    report.check.append(f"{CITY_CODE}/: this is the code as of the copy you provided. When the "
+                        f"city adopts amendments, drop in a newer copy.")
+    return CITY_CODE
+
+
+def import_file(path, catalog, report, wanted=None):
     """Move a file from the inbox into its collection."""
     shown = path.relative_to(INBOX).as_posix()
     suffix = path.suffix.lower()
@@ -321,9 +409,28 @@ def import_file(path, catalog, report):
         return False
 
     folders = path.relative_to(INBOX).parts[:-1]
+    if suffix == ".txt" and (not folders or folders[0] == CITY_CODE):
+        if city_code.looks_like_city_code(path.read_text(encoding="utf-8", errors="replace")):
+            return import_city_code(path, catalog, report, wanted)
+
+    # Calls itself a code, but in a layout city_code.py doesn't know? Don't let
+    # it land in official/ as one huge document: hold it for the librarian.
+    if not folders and not is_transcript(path) and city_code.names_a_code(document_start(path)):
+        report.not_filed.append(
+            f"{shown}: it looks like a city code, but not in a layout the splitter knows "
+            f"(city_code.py), so it wasn't split into chapters. Move it to inbox/{CITY_CODE}/ "
+            f"to file it in the city code collection without splitting (search still works, "
+            f"but answers can't cite section numbers), or to inbox/{DEFAULT_COLLECTION}/ if "
+            f"it isn't a code. {STAYS}")
+        return False
+    if folders and folders[0] == CITY_CODE:
+        report.check.append(f"{shown}: filed in {CITY_CODE} as one document, not split into "
+                            f"chapters (its layout isn't one city_code.py knows).")
+
     if folders:   # dropped in inbox/<folder>/: the librarian chose the collection
         collection, why = folders[0], "it was put in that folder of the inbox"
-        if not (DATA / collection).is_dir():
+        known = (DEFAULT_COLLECTION, MEETINGS, CITY_CODE)
+        if not (DATA / collection).is_dir() and collection not in known:
             choices = ", ".join(sorted(p.name for p in DATA.iterdir() if p.is_dir()))
             report.not_filed.append(f"{shown}: there's no collection named \"{collection}\" "
                                     f"(choices: {choices}). {STAYS}")
@@ -378,7 +485,7 @@ def read_links():
     return found
 
 
-def intake(catalog, report):
+def intake(catalog, report, wanted=None):
     keep = []   # links that weren't filed stay on the list
     for line, url, whole_page in read_links():
         video_id = youtube_id(url)
@@ -394,9 +501,20 @@ def intake(catalog, report):
             report.not_filed[-1] += f" {LINK_STAYS}"
     LINKS.write_text(LINKS_HELP + "".join(f"{line}\n" for line in keep), encoding="utf-8")
 
+    found_code = False
     for path in sorted(INBOX.rglob("*")):
         if path.is_file() and path not in (LINKS, REPORT) and not path.name.startswith("."):
-            import_file(path, catalog, report)
+            if import_file(path, catalog, report, wanted) == CITY_CODE:
+                found_code = True
+
+    # --chapters with no code in the inbox: use the saved full text
+    if wanted is not None and not found_code:
+        saved = sorted((RAW / CITY_CODE).glob("*.txt")) if (RAW / CITY_CODE).is_dir() else []
+        if not saved:
+            report.not_filed.append("--chapters: there's no city code in the inbox or in "
+                                    f"{RAW.as_posix()}/{CITY_CODE}/ to take chapters from.")
+        for path in saved:
+            import_city_code(path, catalog, report, wanted)
 
 
 def refresh(catalog, report):
@@ -410,10 +528,12 @@ def main():
     INBOX.mkdir(exist_ok=True)
     catalog, report = load_catalog(), Report()
     sources.SOURCE_INFO = catalog   # titles and departments come from this run's catalog
-    if "--refresh" in sys.argv[1:]:
+    args = sys.argv[1:]
+    if "--refresh" in args:
         refresh(catalog, report)
     else:
-        intake(catalog, report)
+        spec = args[args.index("--chapters") + 1] if "--chapters" in args[:-1] else None
+        intake(catalog, report, city_code.chapter_numbers(spec))
     save_catalog(catalog)
     report.write()
 

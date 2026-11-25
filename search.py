@@ -15,8 +15,9 @@ The documents are split into collections, each searched on its own. Each
 folder in data/ is one collection:
   - data/official/: policies, web pages, the staff FAQ, and other official documents
   - data/meetings/: transcripts of recorded meetings
-Meeting transcripts are most of the index (about 9 chunks in 10), so searching
-everything together let meeting talk crowd out the official answer.
+  - data/city_code/: the city's code of ordinances, one file per chapter
+Meeting transcripts are most of the index, so searching everything together
+let meeting talk crowd out the official answer. The city code is long too.
 To move a document to another collection, move its file to that folder and
 run build_index.py.
 """
