@@ -3,6 +3,3 @@
 #   Listing pages (event calendars, directories), where the links ARE the content:
 #   add "whole-page" after the address, e.g.  https://example.org/calendar/ whole-page
 # Lines starting with # are ignored. Addresses that are filed are taken off this list.
-
-https://northlibertylibrary.org/about/hours
-http://northlibertylibrary.org/about/contact

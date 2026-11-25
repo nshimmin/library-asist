@@ -59,5 +59,10 @@
     "title": "Library Opening and Closing Procedures (July 2026)",
     "department": "Library",
     "via": "file"
+  },
+  "Contact.txt": {
+    "title": "Contact, Hours, and Location",
+    "url": "https://northlibertylibrary.org/contact/",
+    "via": "web"
   }
 }
