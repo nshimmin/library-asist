@@ -1,55 +1,69 @@
 {
   "web_0.txt": {
     "title": "Accessibility",
-    "url": "https://northlibertylibrary.org/about/accessibility/"
+    "url": "https://northlibertylibrary.org/about/accessibility/",
+    "via": "web"
   },
   "web_1.txt": {
     "title": "Adventure Pass",
-    "url": "https://northlibertylibrary.org/program/adventure-pass/"
+    "url": "https://northlibertylibrary.org/program/adventure-pass/",
+    "via": "web"
   },
   "web_2.txt": {
     "title": "Book Bike",
-    "url": "https://northlibertylibrary.org/program/book-bike/"
+    "url": "https://northlibertylibrary.org/program/book-bike/",
+    "via": "web"
   },
   "web_3.txt": {
     "title": "Storywalk",
-    "url": "https://northlibertylibrary.org/program/storywalk/"
+    "url": "https://northlibertylibrary.org/program/storywalk/",
+    "via": "web"
   },
   "web_4.txt": {
     "title": "Reading Challenges",
-    "url": "https://northlibertylibrary.org/program/reading-challenges/"
+    "url": "https://northlibertylibrary.org/program/reading-challenges/",
+    "via": "web"
   },
   "web_5.txt": {
     "title": "Seeds, Plants and Gardening",
-    "url": "https://northlibertylibrary.org/program/seeds-plants-and-gardening/"
+    "url": "https://northlibertylibrary.org/program/seeds-plants-and-gardening/",
+    "via": "web"
   },
   "web_6.txt": {
     "title": "Resources",
-    "url": "https://northlibertylibrary.org/resources/"
+    "url": "https://northlibertylibrary.org/resources/",
+    "via": "web"
   },
   "web_7.txt": {
     "title": "Room Reservations",
-    "url": "https://northlibertylibrary.org/resources/room-reservations/"
+    "url": "https://northlibertylibrary.org/resources/room-reservations/",
+    "via": "web"
   },
   "web_8.txt": {
     "title": "Event Calendar |",
-    "url": "https://northliberty-ia.whofi.com/"
+    "url": "https://northliberty-ia.whofi.com/",
+    "via": "web",
+    "whole_page": true
   },
   "web_9.txt": {
     "title": "Board & Commissions | City of North Liberty",
-    "url": "https://northlibertyiowa.gov/board-commissions/"
+    "url": "https://northlibertyiowa.gov/board-commissions/",
+    "via": "web"
   },
   "Library Services FAQ.txt": {
     "title": "Library Services FAQ (staff-maintained)",
     "url": "https://github.com/nshimmin/library-asist/blob/main/data/official/Library%20Services%20FAQ.txt",
-    "department": "Library"
+    "department": "Library",
+    "via": "file"
   },
   "NLL-Policy-Manual-NOV2026.pdf": {
     "title": "Library Policy Manual (November 2026)",
-    "department": "Library"
+    "department": "Library",
+    "via": "file"
   },
   "Opening and Closing Procedures - updated 7.2026.pdf": {
     "title": "Library Opening and Closing Procedures (July 2026)",
-    "department": "Library"
+    "department": "Library",
+    "via": "file"
   }
 }

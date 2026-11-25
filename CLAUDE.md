@@ -1,15 +1,21 @@
 # Library & City Info Assistant (MordecAI)
 
-A RAG assistant for North Liberty Public Library (Iowa) that answers questions from the library's and city's own documents, with citations. A prototype for the Humanity AI open call proposal. Maintained by Nick (Adult Services Librarian).
+A RAG assistant for small public libraries
+ 
+## Read these first
 
-Read these first:
-- `docs/project-notes.md`: current plan ("Next up"), decisions log, source rules, privacy
+- `docs/project-notes.md`: the plan ("Next up"), decisions waiting on Nick, decisions log, source rules, privacy
 - `docs/test-questions.md`: the test set and every round's results
 - `docs/implementation-guide.md`: how another library would set this up
 
-## How Nick wants to work
+## Project 
+- Initially a RAG that answers questions about library and city operations from the library's and city's own documents, with citations. 
+- Future iterations will include local history documents and public input largely via Pol.is polls
+- Initial development for the North Liberty Library in North Liberty.  A prototype for the Humanity AI open call proposal.
 
-- **This is a learning project.** Explain each change simply: what it does and why. For small edits, show the exact before/after lines and let Nick make them himself. Pause before committing or pushing.
+## Structure
+
+- **This is a learning project.** Explain each change simply: what it does and why. For small edits, show the exact before/after lines. Pause before committing or pushing.
 - **Avoid temporary fixes.** Wait for a good, lasting fix rather than patching around a problem. If a problem is really a missing or wrong source, fix it at the source.
 - **Follow the Humanity AI proposal** (open-weight models only, local information, residents can check answers). Note any divergence in `docs/project-notes.md`.
 - **Package for other libraries.** Prefer general tools over rules tuned to North Liberty; record how-tos and every package used in `docs/implementation-guide.md`.
@@ -42,5 +48,5 @@ Changes to `data/`, `sources.py`, `sources.json`, or `build_index.py` need `pyth
 | `sources.json` | The catalog: title, web address, department per file |
 | `build_index.py` | Updates `storage/` from `data/`: only new, changed, or removed documents (`--full` for everything) |
 | `check_search.py` | Search diagnostics |
-| `webimport.py`, `youtubeimport.py`, `pdfimport.py` | Import scripts (to be replaced by one import script; see "Next up") |
+| `intake.py` | Files documents from `inbox/` (files, `links.txt`) into `data/` collections and `sources.json`; report in `inbox/REPORT.md`. `--refresh` re-downloads web pages. Needs `requirements-intake.txt`. |
 | `data/` | Documents. Each folder is a collection (`official/`, `meetings/`). `storage/` is the built index (commit it), with `build_manifest.json` (each document's fingerprint and chunk count). |

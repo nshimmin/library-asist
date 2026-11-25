@@ -1,0 +1,5 @@
+# Packages for intake.py (adding documents). The app itself doesn't need these.
+# Install with:  pip install -r requirements.txt -r requirements-intake.txt
+trafilatura          # web pages: keeps the main content, drops menus and footers
+html2text            # listing pages ("whole-page"): the whole page, links included
+youtube-transcript-api   # meeting video transcripts

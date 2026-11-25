@@ -1,0 +1,5 @@
+# Add one web address per line, then run:  python intake.py
+#   YouTube links become meeting transcripts; other links become official documents.
+#   Listing pages (event calendars, directories), where the links ARE the content:
+#   add "whole-page" after the address, e.g.  https://example.org/calendar/ whole-page
+# Lines starting with # are ignored. Addresses that are filed are taken off this list.
