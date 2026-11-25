@@ -60,6 +60,11 @@
     "department": "Library",
     "via": "file"
   },
+  "Contact.txt": {
+    "title": "Contact, Hours, and Location",
+    "url": "https://northlibertylibrary.org/contact/",
+    "via": "web"
+  },
   "Chapter 22 - Public Library.txt": {
     "title": "City Code Chapter 22: Public Library",
     "via": "city code",

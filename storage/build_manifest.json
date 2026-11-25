@@ -611,6 +611,16 @@
    ],
    "chunks": 33
   },
+  "official/Contact.txt": {
+   "fingerprint": "7cc060e9f879cfbf43fae6e09e8f51ad18df386d228879b34004d30257b9ddb8",
+   "collection": "official",
+   "title": "Contact, Hours, and Location",
+   "department": "Library",
+   "doc_ids": [
+    "official/Contact.txt#0"
+   ],
+   "chunks": 3
+  },
   "official/Library Services FAQ.txt": {
    "fingerprint": "8eb7de4a011ff5f204b57744e2d693ef168dcc79f805178e2bea148775ebc75e",
    "collection": "official",
