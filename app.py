@@ -130,11 +130,12 @@ def load_agent(index_version):
     if not os.path.exists(os.path.join(PERSIST_DIR, "docstore.json")):
         raise FileNotFoundError("No search index found. Run build_index.py and push the storage folder.")
     index = load_index_from_storage(StorageContext.from_defaults(persist_dir=PERSIST_DIR))
-    # Two collections, searched separately, so the many meeting transcripts
-    # can't crowd out official documents (see search.py)
+    # Each collection is searched separately, so the many meeting transcripts
+    # (and the long city code) can't crowd out official documents (see search.py)
     reranker = make_reranker()
     official = HybridSearch(index, "official", reranker)
     meetings = HybridSearch(index, "meetings", reranker)
+    city_code = HybridSearch(index, "city_code", reranker)
 
     async def run_search(searcher, query):
         # The reranker takes a few seconds; run it off the main loop so other users aren't blocked
@@ -180,9 +181,27 @@ def load_agent(index_version):
         Returns numbered passages, each labeled with its source."""
         return await run_search(meetings, query)
 
+    async def search_city_code(query: str) -> str:
+        """Search the city's code of ordinances (city law): what the law
+        says about a subject, and the legal powers and duties of the city's
+        boards, commissions, and officials. Use it for questions about
+        ordinances, legal requirements, or what a board is allowed to do.
+        Library rules for patrons are in the policy manual
+        (search_documents), not here.
+        Write a short query from the key words in the question, keeping the
+        name of the board, official, or subject. Examples:
+          "What powers does the library board have?" -> "library board powers duties"
+          "How long is a library trustee's term?" -> "library trustees terms"
+          "Are fireworks allowed in town?" -> "fireworks"
+        Each passage starts with its section number (e.g. 22.03); mention
+        it in the answer. Returns numbered passages, each labeled with its source."""
+        return await run_search(city_code, query)
+
     tools = [search_documents]
     if meetings.size:   # a library with no meeting transcripts gets one tool
         tools.append(search_meeting_records)
+    if city_code.size:  # nor does one without a city code
+        tools.append(search_city_code)
 
     agent = AgentWorkflow.from_tools_or_functions(
         tools,
@@ -194,7 +213,9 @@ def load_agent(index_version):
         Always search before answering. Use search_documents for questions
         about services, policies, rules, fees, events, and schedules. Use
         search_meeting_records only when the question is about what was said
-        or decided at a meeting; use both if a question needs both. Base your
+        or decided at a meeting. Use search_city_code for what city law
+        says, including what a board or official is legally allowed to do.
+        Use more than one if a question needs it. Base your
         answers only on what the searches return — never use outside general
         knowledge. Never take a date, time, fee, or rule from a meeting
         transcript as current: it records what someone said at a past meeting.

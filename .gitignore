@@ -16,3 +16,6 @@ venv/
 .windsurf-server/
 .idea/
 .bash_history
+
+# The intake report is rewritten on every run (see intake.py)
+inbox/REPORT.md

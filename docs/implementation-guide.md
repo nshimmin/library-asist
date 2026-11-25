@@ -175,6 +175,7 @@ Don't add a custom `.devcontainer` setup file. Custom setup images repeatedly fr
 | Other web link | `data/official/` | The page's main content (menus and footers dropped); the page as downloaded is kept in `sources_raw/web/` |
 | PDF, text, or Markdown file | `data/official/` | Filed as it is (PDFs stay PDFs, so answers can cite page numbers) |
 | Text file that starts like a transcript (`Title:` / `Published:` / `Video ID:`) | `data/meetings/` | Filed as it is |
+| Text file of a city code of ordinances | `data/city_code/` | Split into one file per chapter, one heading per section (`city_code.py`); the full text is kept in `sources_raw/city_code/`. `--chapters 22` files only those chapters (also `22,23` or `20-26`). |
 | A file in `inbox/<folder>/` | `data/<folder>/` | Your choice overrides the guess |
 | Word, PowerPoint, Excel | stays in the inbox | Converters are planned; save it as a PDF for now |
 
@@ -189,6 +190,8 @@ Each document gets a catalog entry in `sources.json` (title, web address, and `v
 **Rules the intake follows:** it reads each site's `robots.txt` and won't download pages the site asks automated tools not to fetch (the report says so, and any saved copy is kept). If the site's `robots.txt` has a `Content-Signal` line (how the site says AI may use its content), the report shows it so you can decide. If an address redirects (`http://` to `https://`, or an old path to a new one), the catalog stores the final address. A title you edit by hand in `sources.json` is kept when the page is downloaded again.
 
 **Meeting dates:** the date at the top of a transcript comes from the YouTube Data API, which needs a free API key in the `youtube_api` environment variable. Without one, the date is left as "unknown" and flagged in the report.
+
+**Adding the city code:** save the code of ordinances as a text file (North Liberty's came from the city as one file), drop it in `inbox/`, and run `python intake.py --chapters 22` (or leave off `--chapters` for every chapter). Each chapter becomes `data/city_code/Chapter 22 - Public Library.txt` with a `##` heading per section, so each section is its own search chunk and answers can cite "§22.03." Repealed and reserved chapters are skipped. To add chapters later, run `python intake.py --chapters 23-30` with nothing new in the inbox; the saved full text is used. The splitter (`city_code.py`) follows the layout of Iowa Codification codes (the model code many Iowa cities use). A code in another layout (Municode, American Legal's own codes, General Code) isn't split yet: if a file calls itself a code ("Code of Ordinances" near the top) but isn't in a known layout, `intake.py` holds it in the inbox and the report explains the choices. Move it to `inbox/city_code/` to file it in the city code collection as one document (search works, but answers can't cite section numbers). Patterns for other publishers are planned for the settings file. Add each chapter's web address (its page on the city's online code) to `sources.json` so answers can link to it. All 107 of North Liberty's chapters make about 1,500 chunks.
 
 **Collections:** each folder in `data/` is one collection, searched by its own tool, so the many meeting transcripts can't crowd out official answers. To move a document to another collection, move its file to that folder and run `build_index.py`. Files left directly in `data/` are treated as official.
 
@@ -220,7 +223,7 @@ Each document gets a catalog entry in `sources.json` (title, web address, and `v
 ## 7. Built-in features
 
 - **Source line:** every chunk is stamped with its document's title and department (e.g., "Room Reservations / Library"), so a section keeps its context and the search can tell boards apart. On pages that cover several boards, each section gets its own department from its heading.
-- **Two collections:** official documents and meeting transcripts are searched by separate tools, so transcripts (most of the text) can't crowd out official answers. Each collection is a folder in `data/` (`official/`, `meetings/`). The assistant picks the tool from each tool's description; "How I found this" shows which it used.
+- **Collections:** official documents, meeting transcripts, and the city code are searched by separate tools, so transcripts and the long code can't crowd out official answers. Each collection is a folder in `data/` (`official/`, `meetings/`, `city_code/`); a collection with no documents gets no tool. The assistant picks the tool from each tool's description; "How I found this" shows which it used.
 - **Hybrid search:** meaning search and keyword search each find candidates; the lists are merged, a reranker re-scores them, and only passages above a cutoff go to the model (up to 5). Weak matches are dropped, which is what lets the assistant say "I couldn't find anything."
 - **Source citations:** every answer ends with a "Sources:" list with links, limited to passages actually used.
 - **"How I found this":** under each answer, the search query and passages, so anyone can check how an answer was made.

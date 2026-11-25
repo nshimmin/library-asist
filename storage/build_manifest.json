@@ -1,6 +1,16 @@
 {
  "settings": "711ff1e7e92cbfd3037f64f590ca3f97a889f322c2dbab27789a9e6626c29544",
  "documents": {
+  "city_code/Chapter 22 - Public Library.txt": {
+   "fingerprint": "27184e8cf0a989316ea71eacf26573a65e4adda5796a3f1c1844530bac1fac56",
+   "collection": "city_code",
+   "title": "City Code Chapter 22: Public Library",
+   "department": "City of North Liberty",
+   "doc_ids": [
+    "city_code/Chapter 22 - Public Library.txt#0"
+   ],
+   "chunks": 12
+  },
   "meetings/video_-aXmCQrk4EY_Public Improvements 2026 Ranshaw Way.txt": {
    "fingerprint": "bf84c9aabfef95dbe81ff75ed5b0dd4682015e4caff530142d8c1aff0b850fb8",
    "collection": "meetings",
