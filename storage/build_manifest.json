@@ -602,14 +602,14 @@
    "chunks": 33
   },
   "official/Library Services FAQ.txt": {
-   "fingerprint": "279de29a12e2e8bbf1282d6d1f2f5c6ead1c73d723b26b71cd91de85aba903ef",
+   "fingerprint": "29519ada1d1c7242c22141798a8c3834626b6c07bc0f93ffe6c73b2dced6168f",
    "collection": "official",
    "title": "Library Services FAQ (staff-maintained)",
    "department": "Library",
    "doc_ids": [
     "official/Library Services FAQ.txt#0"
    ],
-   "chunks": 2
+   "chunks": 3
   },
   "official/NLL-Policy-Manual-NOV2026.pdf": {
    "fingerprint": "e5d6a45d52e2491b580b8932578124640a8e44d783cb6ed315ce7db271a0e81c",
