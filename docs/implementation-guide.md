@@ -186,7 +186,7 @@ Each document gets a catalog entry in `sources.json` (title, web address, and `v
 3. **Listing pages** (event calendars, staff directories, lists of databases) are different: their links *are* the content, and trafilatura drops link text. If the saved file is missing titles or names, add the address again with `whole-page` after it. That page is then saved whole (marked `"whole_page": true` in `sources.json`).
 4. **Keeping pages current:** `python intake.py --refresh` downloads every saved web page again; the report says which ones changed.
 
-**Rules the intake follows:** it reads each site's `robots.txt` and won't download pages the site asks automated tools not to fetch (the report says so, and any saved copy is kept). If the site's `robots.txt` has a `Content-Signal` line (how the site says AI may use its content), the report shows it so you can decide.
+**Rules the intake follows:** it reads each site's `robots.txt` and won't download pages the site asks automated tools not to fetch (the report says so, and any saved copy is kept). If the site's `robots.txt` has a `Content-Signal` line (how the site says AI may use its content), the report shows it so you can decide. If an address redirects (`http://` to `https://`, or an old path to a new one), the catalog stores the final address. A title you edit by hand in `sources.json` is kept when the page is downloaded again.
 
 **Meeting dates:** the date at the top of a transcript comes from the YouTube Data API, which needs a free API key in the `youtube_api` environment variable. Without one, the date is left as "unknown" and flagged in the report.
 
@@ -261,6 +261,7 @@ Each document gets a catalog entry in `sources.json` (title, web address, and `v
 - Set the embedding model explicitly, or LlamaIndex silently falls back to OpenAI and errors.
 - Streamlit shows text between two `$` signs as math; the app escapes dollar signs.
 - Website navigation menus pollute search; import only each page's main content.
+- **But check what the footer held.** Dropping menus and footers also dropped North Liberty's hours, address, and phone number, which appeared in every page's footer. The fix is to import the page where that information is the main content (here, the Contact page). A very short page (like a bare "Hours" page) can fail the other way: the extractor can't tell its content from the menu and keeps the menu.
 - Main-content extractors drop link text, which removes event titles from calendars; save listing pages whole.
 - Splitting at headings keeps each topic (e.g., each city board) in its own chunk.
 - Measure before tuning: look at real search scores before choosing settings.

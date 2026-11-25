@@ -148,13 +148,29 @@ def robots_allow(url, report):
     return site_rules(url, report).can_fetch(WEB_AGENT, url)
 
 
+def final_address(url):
+    """Where a web address ends up after redirects (http -> https, old -> new
+    paths), so the catalog links to the page's real, current address."""
+    try:
+        r = requests.head(url, allow_redirects=True, timeout=20, headers={"User-Agent": WEB_AGENT})
+        if r.status_code == 405:   # some sites don't answer HEAD requests
+            r = requests.get(url, allow_redirects=True, timeout=20, headers={"User-Agent": WEB_AGENT})
+        return r.url if r.ok else url
+    except requests.RequestException:
+        return url
+
+
 def import_web(url, whole_page, catalog, report):
     """Download a web page into data/official/ (or update its existing copy)."""
     import html2text
     import trafilatura
 
+    given, url = url, final_address(url)
+    if url != given:
+        report.check.append(f"{given} redirects to {url}; the catalog uses {url}.")
+
     # The same page again? Its copy is updated, wherever it's filed.
-    name = next((n for n, info in catalog.items() if info.get("url") == url), None)
+    name = next((n for n, info in catalog.items() if info.get("url") in (url, given)), None)
     path = existing_files().get(name) if name else None
     kept = f" The saved copy ({path.relative_to(DATA).as_posix()}) was kept." if path else ""
 
@@ -192,7 +208,8 @@ def import_web(url, whole_page, catalog, report):
     raw.write_text(html, encoding="utf-8", newline="")   # exactly as downloaded
 
     entry = catalog.setdefault(name, {})
-    entry.update({"title": title, "url": url, "via": "web"})
+    entry.setdefault("title", title)   # a title edited by hand in sources.json is kept
+    entry.update({"url": url, "via": "web"})
     if whole_page:
         entry["whole_page"] = True
     else:
